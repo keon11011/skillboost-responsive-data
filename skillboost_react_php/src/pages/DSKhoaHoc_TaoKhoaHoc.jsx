@@ -12,7 +12,7 @@ import TextArea from '../components/ui/placeholder/TextArea'
 import Image_01 from '../components/icons/Media/Image01'
 import AddPlus from '../components/icons/Edit/AddPlus.jsx'
 import 'react-datepicker/dist/react-datepicker.css'
-import DatePicker from '../components/ui/placeholder/DatePicker'
+import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
 import DropDown from '../components/ui/placeholder/DropDown.jsx'
 
 
@@ -95,16 +95,14 @@ const DSKhoaHoc_TaoKhoaHoc = () => {
                     </div> 
                 </div>
 
-                
-
-
-            <div className='justify-between flex flex-wrap space-x-6 max-2xl:space-x-1 flex-auto'>
+              
+            <div className='justify-between flex space-x-6 max-2xl:space-x-1 flex-auto'>
               <div>
-                <DatePicker  title='Ngày khai giảng' previewText='Chọn ngày khai giảng'></DatePicker>
+                <CustomDatePicker  title='Ngày khai giảng' previewText='Chọn ngày khai giảng'></CustomDatePicker>
               </div>
 
               <div>
-                <DatePicker title='Ngày bế giảng' previewText='Chọn ngày bế giảng'></DatePicker>
+                <CustomDatePicker title='Ngày bế giảng' previewText='Chọn ngày bế giảng'></CustomDatePicker>
               </div>
 
               <div>

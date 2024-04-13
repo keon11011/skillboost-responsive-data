@@ -7,7 +7,7 @@ import Button from '../components/ui/button/Button'
 import TextInput from '../components/ui/placeholder/TextInput'
 import paid from '../assets/logo/paid.svg'
 
-
+import { Link } from 'react-router-dom'
 
 
 const Thanh_toan2 = () => {
@@ -60,7 +60,11 @@ const Thanh_toan2 = () => {
 
 
         <div className='flex justify-center space-x-[24px] mt-10 w-max self-center'>
-          <Button variant='Outlined'> Trở về trang chủ</Button>
+          <div className='cursor-pointer block'>
+            <Link to="/trangchu" className='ease-in-out'>
+              <Button variant='Outlined'> Trở về trang chủ</Button>
+            </Link>
+          </div>
         </div>
       </div>
 

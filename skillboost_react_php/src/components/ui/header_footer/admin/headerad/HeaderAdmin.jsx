@@ -38,22 +38,22 @@ const HeaderAdmin = ({ children, progressBar }) => {
   };
 
   return (
-    <div className='max-sm:pl-20'> 
+    <div className='max-sm:pl-20'>
       <HeaderContainer className='flex flex-row items-center gap-10 justify-between'>
-        <PageTitle>{children}</PageTitle>
+        <div className='max-sm:hidden'><PageTitle>{children}</PageTitle></div>
+        <div className='hidden max-sm:flex font-bold text-lg'>{children}</div>
         <div className='max-sm:hidden'>
           {progressBar}
         </div>
         <div>
           <UserInfo className='w-full'>
             <span className='max-sm:hidden'>{getCurrentDate()}</span> {/* Current Date */}
-            <div className='max-sm:pl-6'>
+            <div className='max-sm:pl-6 max-sm:hidden'>
               <Notification />
             </div>
             <Avatar className='max-sm:hidden'>
               <img src={avatar} alt="Avt" />
             </Avatar> {/* Replace with actual user name */}
-
           </UserInfo>
         </div>
       </HeaderContainer>

@@ -81,7 +81,7 @@ const DSBaoGia_BangBaoGia = () => {
                                             <td className="px-[16px] py-[24px] text-center">PIC</td>
                                             <td>
                                                 <div className='cursor-pointer block'>
-                                                    <Link to="/lead/dsbaogia/xemchitietbaogia">
+                                                    <Link to={`/lead/dsbaogia/${localStorage.getItem('MaLead')}/xemchitietbaogia/${baoGia.MaBaoGia}`}>
                                                         <ActionIcon size='Small' icon={<ChevronRight width="1rem" height="1rem"/>} />
                                                     </Link>
                                                 </div>

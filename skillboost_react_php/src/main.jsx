@@ -9,6 +9,8 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import TrangChu_DSKhoaHoc from './pages/TrangChu_DSKhoaHoc.jsx'
 import DangNhap from './pages/DangNhap.jsx'
 import Chitietkhoahoc from './pages/Chitietkhoahoc.jsx'
+import Thanh_toan from './pages/Thanh_toan.jsx'
+import Thanh_toan2 from './pages/Thanh_toan2.jsx'
 
 import Dashboard from './pages/Dashboard.jsx'
 
@@ -53,6 +55,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/khoahoc/:id' element={<Chitietkhoahoc />}></Route>
         <Route path='/dangnhap' element={<DangNhap />}></Route>
 
+        <Route path='/thongtinthanhtoan' element={<Thanh_toan />}></Route>
+        <Route path='/thongtinthanhtoan/thanhtoanthanhcong' element={<Thanh_toan2 />}></Route>
+
         <Route path='/dashboard' element={<Dashboard />}></Route>
 
         <Route path='/lead/thongtin' element={<DSLead_BangLead />}></Route>
@@ -62,7 +67,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/lead/thongtin/huytheodoilead/:id' element={<DSLead_HuyTheoDoiLead />}></Route>
 
         <Route path='/lead/dsbaogia/:leadid' element={<DSBaoGia_BangBaoGia/>}></Route>
-        <Route path='/lead/dsbaogia/xemchitietbaogia' element={<DSBaoGia_XemChiTietBaoGia />}></Route>
+        <Route path='/lead/dsbaogia/:leadid/xemchitietbaogia/:baogiaid' element={<DSBaoGia_XemChiTietBaoGia />}></Route>
         <Route path='/lead/dsbaogia/taobaogia/:leadid' element={<DSBaoGia_TaoBaoGia />}></Route>
         <Route path='/lead/dsbaogia/chinhsuabaogia' element={<DSBaoGia_ChinhSuaBaoGia />}></Route>
 

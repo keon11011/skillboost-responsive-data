@@ -273,7 +273,7 @@ const DSLead_XemChiTietLead = () => {
               </div>
             </div>
             <div className='space-y-[16px]'>
-              <div className='title-medium text-text-primary'>Khóa học đã mua</div>
+              <div className='title-medium text-text-primary'>Khóa học</div>
               <div id='Table' className="overflow-x-auto rounded-lg border border-outline-table">
                 <table className="table-auto w-full">
                   <thead className='title-small text-text-secondary text-left'>

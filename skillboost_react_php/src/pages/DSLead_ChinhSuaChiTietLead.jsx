@@ -13,7 +13,7 @@ import TextArea from '../components/ui/placeholder/TextArea'
 import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
 import LeadInfoTab from '../components/ui/tabs/LeadInfoTab';
 import LeadProgressStatus from '../components/ui/chips/LeadProgressStatus'; 
-import CourseSelector from '../components/ui/SelectItems/CourseSelector'
+import CourseSelectorNew from '../components/ui/SelectItems/CourseSelectorNew';
 import InformSuccess from '../components/ui/inform/InformSuccess'
 import InformFailure from '../components/ui/inform/InformFailure'
 
@@ -24,10 +24,6 @@ import AddPlus from '../components/icons/Edit/AddPlus'
 const DSLead_ChinhSuaChiTietLead = () => {
 
   const [showCourseSelector, setShowCourseSelector] = useState(false);
-
-  const handleCourseSelectorClick = () => {
-      setShowCourseSelector(!showCourseSelector);
-    };
 
   //Hiển thị data dưới BE lên
   const [inputs, setInputs] = useState([]);
@@ -160,6 +156,16 @@ const DSLead_ChinhSuaChiTietLead = () => {
             setSelectedCourses(response.data);
         });
     }
+
+    //Chọn các khóa học trong CourseSelector
+    const handleCourseSelectorClick = () => {
+      setShowCourseSelector(!showCourseSelector);
+    };
+  
+    const handleCourseSelection = (selectedCourses) => {
+      console.log("Khóa học được chọn:", selectedCourses); // Check if this logs the selected courses array
+      setSelectedCourses(selectedCourses);
+    };
 
     console.log(id);
   
@@ -299,7 +305,7 @@ const DSLead_ChinhSuaChiTietLead = () => {
                 </div>
             </div>
             <div className='space-y-[16px]'>
-              <div className='title-medium text-text-primary'>Khóa học đã mua</div>
+              <div className='title-medium text-text-primary'>Khóa học</div>
               <div id='Table' className="overflow-x-auto rounded-lg border border-outline-table">
                 <table className="table-auto w-full">
                   <thead className='title-small text-text-secondary text-left'>
@@ -339,17 +345,19 @@ const DSLead_ChinhSuaChiTietLead = () => {
                   <Button type='submit' variant='Primary' size='Medium'>Lưu thay đổi</Button>
                   </div>
               </div>
-                
             </div>
             </form>
             </div>
         </div>
         </div>
-        {showCourseSelector && 
-          <div className="absolute top-[560px] left-[500px] z-50">
-              <CourseSelector/>
-          </div>
-        }
+        {showCourseSelector && (
+        <div className="absolute top-[396px] left-[500px] z-50">
+          <CourseSelectorNew
+            onSubmit={handleCourseSelection}
+            onCancel={setShowCourseSelector}
+          />
+        </div>
+        )}
         {showSuccess && <InformSuccess>Chỉnh sửa thông tin Lead thành công</InformSuccess>}
         {showFailure && <InformFailure>Chỉnh sửa thông tin Lead thất bại</InformFailure>}
     </main>
