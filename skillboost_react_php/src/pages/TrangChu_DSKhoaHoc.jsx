@@ -58,7 +58,7 @@ const TrangChu_DSKhoaHoc = () => {
                     <ul key={key}>
                         <li>
                             <Link to={`/khoahoc/${khoahoc.MaKhoaHoc}`}>
-                                <CourseCard coursepic={ITBA_course} coursename ={khoahoc.TenKhoaHoc} teachername={khoahoc.GiangVien} starrate={khoahoc.DanhGiaKhoaHoc} price={formatAmountToVND(khoahoc.GiaTien)}/>
+                                <CourseCard coursepic={khoahoc.HinhMinhHoc} coursename ={khoahoc.TenKhoaHoc} teachername={khoahoc.GiangVien} starrate={khoahoc.DanhGiaKhoaHoc} price={formatAmountToVND(khoahoc.GiaTien)}/>
                             </Link>
                         </li>
                     </ul>
@@ -69,7 +69,9 @@ const TrangChu_DSKhoaHoc = () => {
         <div name="Footer">
             <Footer />
         </div>
+        
     </main>
+    
   )
 }
 

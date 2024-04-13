@@ -13,10 +13,6 @@ import Hide from '../components/icons/Edit/Hide';
 
 const DangNhap = () => {
 
-    //var _MaNV = '3';
-    // localStorage.setItem('MaNV',_MaNV);
-    // console.log(localStorage.getItem('MaNV'));
-
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -92,6 +88,7 @@ const DangNhap = () => {
                     height="1.25rem"
                     strokeWidth={1.5}
                     stroke="#5E6A6E"
+                    onClick={togglePasswordVisibility}
                   />
                 }
                 onClickRightIcon={togglePasswordVisibility}

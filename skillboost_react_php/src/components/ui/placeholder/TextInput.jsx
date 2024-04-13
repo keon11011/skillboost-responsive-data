@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import styled, { css } from 'styled-components';
 
 
@@ -35,6 +35,7 @@ const IconWrapperRight = styled.span`
   margin-left: 0px;
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const IconWrapperLeft = styled.span`
@@ -72,6 +73,7 @@ const Title = styled.div`
     `}
 `;
 
+
 const Note = styled.div`
   font-weight: medium;
   font-size: 0.875rem;
@@ -79,14 +81,22 @@ const Note = styled.div`
     props.variant === 'Error' ? '#FF4141' : '#5E6A6E'};
 `;
 
-const TextInput = ({ variant, previewText, title, showRedAsterisk, note, name, onChange, leftIcon, rightIcon, readOnly, children, ...rest }) => {
+const TextInput = ({ variant, previewText, title, showRedAsterisk, note, name, onChange, leftIcon, rightIcon, readOnly, children, type, ...rest }) => {
+
+  //Tùy chọn Hide/Show cho passowrd
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev);
+  };
+
   return (
     <TextInputContainer>
       {title && <Title showRedAsterisk={showRedAsterisk}>{title}</Title>}
       <TextInputWrapper variant={variant}>
         {leftIcon && <IconWrapperLeft>{leftIcon}</IconWrapperLeft>}
         <TextInputComponent
-          type="text"
+          type={passwordVisible ? 'text' : type || 'text'}
           placeholder={previewText}
           value={children}
           name={name}
@@ -94,7 +104,10 @@ const TextInput = ({ variant, previewText, title, showRedAsterisk, note, name, o
           readOnly={variant === 'ReadOnly'} // Set readOnly prop based on variant
           {...rest} // Spread the remaining props here
         />
-        {rightIcon && <IconWrapperRight>{rightIcon}</IconWrapperRight>}
+        {rightIcon && 
+          <IconWrapperRight onClick={togglePasswordVisibility}>
+            {rightIcon}
+          </IconWrapperRight>}
       </TextInputWrapper>
       {note && <Note variant={variant}>{note}</Note>}
     </TextInputContainer>

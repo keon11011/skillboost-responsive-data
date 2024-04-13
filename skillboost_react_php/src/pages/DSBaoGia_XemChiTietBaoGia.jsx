@@ -64,7 +64,11 @@ const DSBaoGia_XemChiTietBaoGia = () => {
   }
 
   //Kiểm tra trạng thái gửi email
-  const [emailSent, setEmailSent] = useState(false);
+  const [emailSent, setEmailSent] = useState(thongTinBaoGias.TrangThaiBaoGia = 'Chưa thanh toán' ? true : false);
+
+  console.log(thongTinBaoGias.TrangThaiBaoGia)
+  console.log(emailSent)
+
 
   //Ấn gửi email
 
@@ -134,7 +138,7 @@ const DSBaoGia_XemChiTietBaoGia = () => {
               </div>
               ) : (
                 <div className="w-auto"></div>
-              )} 
+              )}
           </div>
           <div id="Content" className="flex flex-col space-y-[24px] w-full h-full">
             <div>
@@ -178,13 +182,15 @@ const DSBaoGia_XemChiTietBaoGia = () => {
               </div>
             </div>
             <div className="flex w-full space-x-[12px] items-center justify-end">
+            <div className="flex w-full space-x-[12px] items-center justify-end">
               {emailSent ? (
-                <Button variant="Primary" size="Medium" onClick={handleOnClickEmailSend} state="disabled">
-                 Gửi email
+                <Button variant="Primary" size="Medium" onClick={handleOnClickEmailSend}>
+                  Gửi email
                 </Button>
               ) : (
                 <div className="body-medium text-text-secondary">Đã gửi email báo giá</div>
-              )}          
+              )}
+            </div>        
             </div>
           </div>
         </div>

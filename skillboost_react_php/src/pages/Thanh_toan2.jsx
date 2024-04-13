@@ -1,4 +1,7 @@
-import React from 'react'
+import axios from "axios"
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+
 import SkillboostLogo from '../assets/logo/SkillboostLogo.svg'
 import Background from '../assets/logo/Background.svg'
 import qrcode from '../assets/logo/qrcode.svg'
@@ -7,10 +10,27 @@ import Button from '../components/ui/button/Button'
 import TextInput from '../components/ui/placeholder/TextInput'
 import paid from '../assets/logo/paid.svg'
 
-import { Link } from 'react-router-dom'
-
-
 const Thanh_toan2 = () => {
+  //Hiển thị data dưới BE lên
+  const [thongTinBaoGias, getThongTinBaoGias] = useState([]);
+
+  useEffect(() => {
+    getBaoGia();
+  }, []);
+
+  function getBaoGia() {
+    axios.get("http://localhost:80/SkillBoost-API/api/BaoGia/read_latest.php").then(function (response) {
+      console.log('Thông tin chi tiết báo giá của Lead', response.data);
+      getThongTinBaoGias(response.data);
+    });
+  }
+
+  // Format VND
+  const formatAmountToVND = (amount) => {
+    const config = { style: 'currency', currency: 'VND', maximumFractionDigits: 9 };
+    return new Intl.NumberFormat('vi-VN', config).format(amount);
+  };
+
   return (
     
     <div className=''> 
@@ -32,8 +52,8 @@ const Thanh_toan2 = () => {
             </div>
             <div className=' pl-2 w-full space-y-6'>
               <div className='flex space-x-16'>
-                <TextInput title='Mã đơn hàng' variant='ReadOnly'> ID01468790</TextInput>
-                <TextInput title='Mã giảm giá (nếu có) ' variant='ReadOnly'> LEA00813218_HHSV_01</TextInput>
+                <TextInput title='Mã đơn hàng' variant='ReadOnly'>{thongTinBaoGias.MaBaoGia}</TextInput>
+                <TextInput title='Mã giảm giá (nếu có) ' variant='ReadOnly'>{thongTinBaoGias.MaGiamGia}</TextInput>
               </div>
 
               <div className='flex space-x-16'>
@@ -49,7 +69,7 @@ const Thanh_toan2 = () => {
 
               <div className='body medium text-text-secondary flex flex-col'>
                 Tổng tiền:
-                  <label for="" class="block mb-2  ">7.990.000đ</label>
+                  <label for="" class="block mb-2  ">{formatAmountToVND(thongTinBaoGias.TongTien)}</label>
               </div>
             </div>
             
