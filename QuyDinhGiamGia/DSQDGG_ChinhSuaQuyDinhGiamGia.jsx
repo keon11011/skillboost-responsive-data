@@ -217,17 +217,17 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
                   </div>
               </div>
             </div>
-            <div className="flex text-right  w-full place-items-right rounded-lg lg:overflow-visible">
-                    <div className=' relative bg-background-primary space-x-4 p-2 flex-col'  >
-                      <Button type='submit' size="Medium" variant="Primary">Lưu thay đổi</Button>
-                    </div>
-                    <div className='relative bg-background-primary space-x-4 p-2 flex-col'>
+            <div className="flex w-full justify-end rounded-lg lg:overflow-visible">
+                    <div className='relative bg-background-primary space-x-4 p-2'>
                       <div className='cursor-pointer block'>
                         <Link to={`/dsqdgg/xemchitietdsqdgg/${inputs.MaQuyDinhGiamGia}`}>
                           <Button type='submit' size="Medium" variant="Destructive-plain">Hủy thay đổi</Button>
                         </Link>
                       </div>
                     </div>
+                    <div className=' relative bg-background-primary space-x-4 p-2 '  >
+                      <Button type='submit' size="Medium" variant="Primary">Lưu thay đổi</Button>
+                    </div>      
                 </div>
                 </form>
             </div>

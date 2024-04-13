@@ -91,7 +91,7 @@ const DSQDGG_XemChiTietQuyDinhGiamGia = () => {
           <div className="max-sm:hidden">
             <HeaderAdmin>Quy định giảm giá</HeaderAdmin>
           </div>
-          <div className="sm:hidden max-sm:headline-medium max-sm:flex max-sm:space-x-[40px]">
+          <div className="sm:hidden max-sm:headline-medium max-sm:flex max-sm:space-x-[30px]">
             <Link to = "/dsqdgg">
             <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
             </Link>
@@ -192,7 +192,7 @@ const DSQDGG_XemChiTietQuyDinhGiamGia = () => {
                   <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelDelete}/>} />
                   </div>
                   </div>
-                  <div className='flex flex-col space-y-[16px] sm:w-[463px] max-sm:w-[300px]'>
+                  <div className='flex flex-col space-y-[16px] sm:w-[463px] max-sm:w-[286px]'>
                     <div className='h-[316px]'>
                       <TextArea title='Lý do xóa' previewText='Nhập lý do xóa'/>
                     </div>

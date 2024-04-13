@@ -196,19 +196,19 @@ const DSQDGG_TaoQuyDinhGiamGia = () => {
             </div>
 
           </div>
-          <div className=" flex text-right w-full place-items-right rounded-lg lg:overflow-visible">
-                  <div className='w-fit relative bg-background-primary space-x-4 p-2 flex-col'  >
-                    <Button size="Medium" variant="Primary" type='submit'>Xác nhận tạo</Button>
-                    
-                  </div>
-                  <div className='relative bg-background-primary space-x-4 p-2 flex-col'>
+          <div className="flex w-full justify-end rounded-lg lg:overflow-visible ">
+                  <div className='relative bg-background-primary space-x-4 p-2 '>
                     <div className='cursor-pointer block'>
                       <Link to="/dsqdgg">
                         <Button size="Medium" variant="Destructive-plain">Hủy tạo</Button>
                       </Link>
                     </div>
                   </div>
-              </div>
+                  <div className='w-fit relative bg-background-primary space-x-4 p-2'  >
+                    <Button size="Medium" variant="Primary" type='submit'>Xác nhận tạo</Button>
+                  </div>
+                  
+          </div>
               </form>
           </div>
           <div className="sm:left-1/3 absolute max-h-[calc(100vh-5em)] h-fit max-w-lg overflow-hidden
