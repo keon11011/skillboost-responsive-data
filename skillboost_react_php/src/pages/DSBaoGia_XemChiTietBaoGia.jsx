@@ -37,7 +37,7 @@ const DSBaoGia_XemChiTietBaoGia = () => {
       </div>
       <div id="ContentContainer" className="w-full h-full px-[64px] py-[32px] space-y-[24px]">
         <div id="Header">
-          <HeaderAdmin progressBar={<Nhantuvan />}>Phan Văn Trị</HeaderAdmin>
+          <HeaderAdmin progressBar={<Nhantuvan />}>{localStorage.getItem('HoTenLead')}</HeaderAdmin>
         </div>
         <div id="LeadInfoNavigation" className="flex space-x-[24px]">
           <div className="grow">
@@ -52,7 +52,7 @@ const DSBaoGia_XemChiTietBaoGia = () => {
           <div id="Header" className="flex justify-between">
             <div className="flex space-x-[16px] items-center">
               <div className='cursor-pointer block'>
-                  <Link to="/lead/dsbaogia">
+                  <Link to={`/lead/dsbaogia/${localStorage.getItem('MaLead')}`}>
                     <ActionIcon size="Medium" icon={<ChevronLeft width="1.5rem" height="1.5rem" />} />
                   </Link>
               </div>

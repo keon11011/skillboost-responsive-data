@@ -147,6 +147,20 @@ const DSLead_ChinhSuaChiTietLead = () => {
         })
     }
 
+    //Đẩy khóa học YCTV lên bảng hiển thị
+    const [selectedCourses, setSelectedCourses] = useState([]);
+
+    useEffect(() => {
+        getBaoGiaKhoaHoc();
+    }, []);
+
+    function getBaoGiaKhoaHoc() {
+        axios.get(`http://localhost:80/SkillBoost-API/api/KhoaHoc/read_khoahoc_in_yctv.php?MaLead=${id}`).then(function (response) {
+            console.log(response.data);
+            setSelectedCourses(response.data);
+        });
+    }
+
     console.log(id);
   
 
@@ -296,29 +310,43 @@ const DSLead_ChinhSuaChiTietLead = () => {
                     </tr>
                   </thead>
                   <tbody className='body-medium text-text-primary'>
-                    <tr>
-                      <td colspan="3" className='px-[16px] py-[16px]'>
-                        <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>Thêm khóa học</Button>
-                      </td>
-                    </tr>
+                    {selectedCourses.length > 0 ? (
+                        selectedCourses.map((khoaHoc, key) => (
+                          <tr className="hover:bg-background-secondary border-b border-t" key={key}>
+                            <td className="px-[16px] py-[24px]">{khoaHoc.TenKhoaHoc}</td>
+                            <td className="px-[16px] py-[24px]">{khoaHoc.GiangVien}</td>
+                            <td className="w-[214px] px-[16px] py-[24px]">{khoaHoc.GiaTien}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr className="hover:bg-background-secondary border-b border-t">
+                          <td colSpan={3} className="px-[16px] py-[24px]">Chưa có khóa học</td>
+                        </tr>
+                      )}
                   </tbody>
                 </table>
               </div>
             </div>
             <div className='flex w-full space-x-[12px] items-center justify-end'>
-                <div className='cursor-pointer block'>
-                  <Link to="/lead/thongtin/xemchitietlead">
-                    <Button variant='Destructive-plain' size='Medium'>Hủy thay đổi</Button>
-                  </Link>
-                </div>   
-                <Button type='submit' variant='Primary' size='Medium'>Lưu thay đổi</Button>
+              <div className="flex w-full justify-between mt-8">
+                <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>Thêm khóa học</Button>
+                <div className="flex space-x-4">
+                  <div className='cursor-pointer block'>
+                    <Link to={`/lead/thongtin/xemchitietlead/${id}`}>
+                      <Button variant='Destructive-plain' size='Medium'>Hủy thay đổi</Button>
+                    </Link>
+                  </div>   
+                  <Button type='submit' variant='Primary' size='Medium'>Lưu thay đổi</Button>
+                  </div>
+              </div>
+                
             </div>
             </form>
             </div>
         </div>
         </div>
         {showCourseSelector && 
-          <div className="absolute top-[64px] left-[500px] z-50">
+          <div className="absolute top-[560px] left-[500px] z-50">
               <CourseSelector/>
           </div>
         }

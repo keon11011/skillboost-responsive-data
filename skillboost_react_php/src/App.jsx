@@ -1,10 +1,10 @@
 import './font.css'
 
-import DSLead_BangLead from './pages/DSLead_BangLead';
+import Thanh_toan from './pages/Thanh_toan';
 
 const App = () => (
   <main className="relative">
-    <DSLead_BangLead/>
+    <Thanh_toan/>
   </main>
 )
 
