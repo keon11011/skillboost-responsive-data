@@ -69,7 +69,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/lead/dsbaogia/:leadid' element={<DSBaoGia_BangBaoGia/>}></Route>
         <Route path='/lead/dsbaogia/:leadid/xemchitietbaogia/:baogiaid' element={<DSBaoGia_XemChiTietBaoGia />}></Route>
         <Route path='/lead/dsbaogia/taobaogia/:leadid' element={<DSBaoGia_TaoBaoGia />}></Route>
-        <Route path='/lead/dsbaogia/chinhsuabaogia' element={<DSBaoGia_ChinhSuaBaoGia />}></Route>
+        <Route path='/lead/dsbaogia/:leadid/chinhsuabaogia/:baogiaid' element={<DSBaoGia_ChinhSuaBaoGia />}></Route>
 
         <Route path='/lead/dshoatdong' element={<DSHoatDongLead_BangHoatDong />}></Route>
         <Route path='/lead/dshoatdong/xemchitiethoatdong' element={<DSHoatDongLead_XemChiTietHoatDong />}></Route>

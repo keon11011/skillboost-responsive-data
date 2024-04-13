@@ -19,7 +19,9 @@ import InformFailure from '../components/ui/inform/InformFailure'
 import ChevronLeft from '../components/icons/Arrow/ChevronLeft';
 import CloseMd from '../components/icons/Menu/CloseMd'
 
+
 const DSBaoGia_XemChiTietBaoGia = () => {
+
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const handleDelete = () => {
@@ -46,8 +48,10 @@ const DSBaoGia_XemChiTietBaoGia = () => {
     axios.get(`http://localhost:80/SkillBoost-API/api/BaoGia/read_single.php?MaBaoGia=${baogiaid}`).then(function (response) {
       console.log('Thông tin chi tiết báo giá của Lead', response.data);
       getThongTinBaoGias(response.data);
+      localStorage.setItem('MaBaoGia', response.data.MaBaoGia);
     });
   }
+
 
   //Đẩy khóa học YCTV lên bảng hiển thị
   const [selectedCourses, setSelectedCourses] = useState([]);
@@ -62,12 +66,6 @@ const DSBaoGia_XemChiTietBaoGia = () => {
           setSelectedCourses(response.data);
       });
   }
-
-  //Kiểm tra trạng thái gửi email
-  const [emailSent, setEmailSent] = useState(thongTinBaoGias.TrangThaiBaoGia = 'Chưa thanh toán' ? true : false);
-
-  console.log(thongTinBaoGias.TrangThaiBaoGia)
-  console.log(emailSent)
 
 
   //Ấn gửi email
@@ -84,7 +82,6 @@ const DSBaoGia_XemChiTietBaoGia = () => {
 
       console.log(response.data);
         setShowSuccess(true);
-        setEmailSent(true);
         setTimeout(() => {
           setShowSuccess(false);
           navigate(`/`);
@@ -127,10 +124,10 @@ const DSBaoGia_XemChiTietBaoGia = () => {
               </div>
               <div className="text-text-primary title-large">{thongTinBaoGias.TenBaoGia}</div>
             </div>
-            {emailSent ? (
+            {thongTinBaoGias.TrangThaiBaoGia != 'Đã gửi mail' ? (
                 <div className="flex space-x-[12px]">   
                 <div className='cursor-pointer block'>
-                    <Link to="/lead/dsbaogia/chinhsuabaogia">
+                    <Link to={`/lead/dsbaogia/${localStorage.getItem('MaLead')}/chinhsuabaogia/${baogiaid}`}>
                       <ActionPersonDetail variant="Edit" />
                     </Link>
                 </div>
@@ -183,7 +180,7 @@ const DSBaoGia_XemChiTietBaoGia = () => {
             </div>
             <div className="flex w-full space-x-[12px] items-center justify-end">
             <div className="flex w-full space-x-[12px] items-center justify-end">
-              {emailSent ? (
+              {thongTinBaoGias.TrangThaiBaoGia != 'Đã gửi mail' ? (
                 <Button variant="Primary" size="Medium" onClick={handleOnClickEmailSend}>
                   Gửi email
                 </Button>
@@ -194,25 +191,93 @@ const DSBaoGia_XemChiTietBaoGia = () => {
             </div>
           </div>
         </div>
-        {showDeleteConfirmation && (
-          <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
-            <div className="relative flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
-              <div>
-              <div className='flex w-full justify-center title-large text-text-primary'>Xác nhận xóa báo giá</div>
-              <div className='absolute top-[36px] right-[36px]'>
-              <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelDelete}/>} />
-              </div>
-              </div>
-              <div className='flex flex-col space-y-[16px]'>
-                <div className='h-[316px]'>
-                  <TextArea title='Lý do xóa' previewText='Điền lý do'/>
+        {showPromotionInputs ? (
+              <>
+                <div className='title-medium text-text-primary'>Khuyến mãi</div>
+                <div className='flex overflow-x-auto w-full space-x-[16px] '>
+                  <TextInput 
+                    title="Số khóa học mua chung" 
+                    previewText="Nhập số khóa học" 
+                    value={selectedCoursesLength} 
+                    type="text"
+                  />
+                  {/* <DropDown
+                    title="Đối tượng ưu tiên"
+                    previewText="Chọn đối tượng ưu tiên"
+                    options={["Học sinh - Sinh Viên", "Giảng viên đại học", "Không có"]}
+                    selectedOption={selectedDoiTuongUuTien}
+                    setSelectedOption={setSelectedDoiTuongUuTien}
+                  /> */}
+                  <TextInput 
+                    title="Đối tượng ưu tiên" 
+                    previewText="Chọn đối tượng ưu tiên" 
+                    value={lead.TenNgheNghiep} 
+                    type="text"
+                  />
+                  {/* <DropDown
+                    title="Dịp đặc biệt"
+                    previewText="Chọn dịp đặc biệt"
+                    options={["Ngày lễ", "Không có"]}
+                    selectedOption={selectedDipDacBiet}
+                    setSelectedOption={setSelectedDipDacBiet}
+                  /> */}
+                  <TextInput 
+                    title="Dịp đặc biệt" 
+                    previewText="Chọn dịp đặc biệt" 
+                    value={specialOccasion} 
+                    type="text"
+                  />
                 </div>
-                <AlertInfo>Để xóa báo giá cần điền lý do xóa</AlertInfo>
+                <div className='flex w-1/3 pr-[16px]'>
+                  {qdggThoa ? (
+                      // Render DropDown if qdggThoa is true
+                      <DropDown
+                          id="PhanTramGiamGia"
+                          title="Phần trăm giảm giá (%)"
+                          previewText="Chọn Phần trăm giảm giá (%)"
+                          options={discountArray.map(i => ({
+                            value: i, 
+                            label:i
+                        }))}
+                          onHandleChange={handlePhanTramGiamGiaChange}
+                      />
+                  ) : (
+                      <TextInput
+                          title="Phần trăm giảm giá (%)"
+                          previewText="Nhập phần trăm giảm giá"
+                          value="Không tìm thấy mã giảm giá phù hợp!"
+                      />
+                  )}
+                </div>
+                <div className='flex'>
+                  <Button variant='Neutral' size='Medium' onClick={handleAddPromotionClick}>Ẩn khuyến mãi</Button>
+                </div>
+              </>
+            ) : (
+              <div className='space-y-[16px]'>
+                <div className='title-medium text-text-primary'>Khuyến mãi</div>
+                <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5} />} onClick={handleAddPromotionClick}>Thêm khuyến mãi</Button>
+              </div> 
+            )}
+          {showDeleteConfirmation && (
+            <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
+              <div className="relative flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
+                <div>
+                <div className='flex w-full justify-center title-large text-text-primary'>Xác nhận xóa báo giá</div>
+                <div className='absolute top-[36px] right-[36px]'>
+                <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelDelete}/>} />
+                </div>
+                </div>
+                <div className='flex flex-col space-y-[16px]'>
+                  <div className='h-[316px]'>
+                    <TextArea title='Lý do xóa' previewText='Điền lý do'/>
+                  </div>
+                  <AlertInfo>Để xóa báo giá cần điền lý do xóa</AlertInfo>
+                </div>
+                <Button variant="Destructive" size='Big' onClick={handleDelete}>Xác nhận xóa</Button>
               </div>
-              <Button variant="Destructive" size='Big' onClick={handleDelete}>Xác nhận xóa</Button>
             </div>
-          </div>
-        )}
+          )}
       </div>
       {showSuccess && <InformSuccess>Gửi Email báo giá thành công</InformSuccess>}
       {showFailure && <InformFailure>Gửi Email báo giá Lead thất bại</InformFailure>}
