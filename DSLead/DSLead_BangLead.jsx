@@ -144,7 +144,7 @@ const DSLead_BangLead = () => {
                     </table>
                 </div>
                 {showLeadListFilter && 
-                <div className="absolute max-sm:w-[370px] top-[16px] left-[-20px] z-50">
+                <div className="absolute max-sm:w-[370px] top-[16px] sm:left-[850px] max-sm:left-[-20px] z-50">
                     <LeadListFilter/>
                 </div>
                 }
