@@ -11,6 +11,8 @@ import TextInput from '../components/ui/placeholder/TextInput'
 import TextArea from '../components/ui/placeholder/TextArea'
 import CourseSelectorNew from '../components/ui/SelectItems/CourseSelectorNew'
 import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
+import InformSuccess from '../components/ui/inform/InformSuccess'
+import InformFailure from '../components/ui/inform/InformFailure'
 
 import AddPlus from '../components/icons/Edit/AddPlus'
 import ChevronLeft from '../components/icons/Arrow/ChevronLeft'
@@ -104,7 +106,7 @@ const DSLead_TaoLead = () => {
 
               console.log('InputYCTV', updatedInputYCTVs); // Log updatedInputYCTVs
 
-              // Create YeuCauTuVan after setting TaoBoiL ead
+              // Create YeuCauTuVan after setting TaoBoiLead
               axios.post('http://localhost:80/SkillBoost-API/api/YeuCauTuVan/create.php', updatedInputYCTVs)
                 .then(function(response3){
                   console.log('Post YCTV', response3.data);
