@@ -22,7 +22,7 @@ const DSQuyDinhGiamGia = () => {
     }, []);
 
     function getQdggs() {
-        axios.get('http://localhost:80/SkillBoost-API/api/QuyDinhGiamGia/read_all.php').then(function(response) {
+        axios.get('http://localhost:8080/SkillBoost-API/api/QuyDinhGiamGia/read_all.php').then(function(response) {
             console.log(response.data);
             setQdggs(response.data);
         });
@@ -50,31 +50,30 @@ const DSQuyDinhGiamGia = () => {
 
   return (
 <main id = "DSQuyDinhGiamGia">
-<div className='w-full h-screen bg-background-secondary relative grid grid-cols-7 gap-4'>
-    <div className='col-span-1 max-sm:hidden'>
+<div className='w-full bg-background-secondary flex'>
+    <div id='Sidebar' className='sticky top-0 h-screen max-sm:relative'>
       <SidebarQL/>
     </div>
-    <div id ="ContentContainer" className='flex flex-col h-screen sm:col-span-6 max-sm:col-span-7 bg-background-secondary px-[64px] py-[32px] space-y-[24px]' >
+    <div id ="ContentContainer" className='w-full h-full sm:px-[64px] max-sm:px-[30px] sm:py-[32px] max-sm:py-[20px] space-y-[24px]'>
       <div className="max-sm:hidden">
         <HeaderAdmin>Quy định giảm giá</HeaderAdmin>
       </div>
-      <div className="sm:hidden max-sm:headline-medium max-sm:flex max-sm:justify-between max-sm:pr-28 ">
-        <ActionIcon size='Medium' icon={<SvgHamburgerMd width="1.5rem" height="1.5rem"/>} />
-        <div className="max-sm:font-bold max-sm:text-center max-sm:pt-1 max-sm:title-medium max-sm:text-text-primary">Quy định giảm giá</div>
-      </div>
+
+      <div className="sm:hidden max-sm:font-bold max-sm:text-center max-sm:title-medium max-sm:text-text-primary">Quy định giảm giá</div>
+      
       <div className='w-full h-full relative rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] flex-col items-start justify-between p-6 max-sm:pr-4 max-sm:pl-4 gap-[24px] '>
           <div className='pb-5 flex justify-between'>
-            <div className="relative flex items-center title-large max-sm:w-[180px]">Danh sách quy định giảm giá</div>
+            <div className="relative flex items-center sm:title-large max-sm:title-medium max-sm:w-[180px]">Danh sách quy định giảm giá</div>
             <div className="max-sm:hidden">{showSearchBar && <SearchBar previewText='Tìm kiếm hoạt động'/>}    </div>
-            <div className='flex space-x-[4px]'>
+            <div className='flex space-x-[16px] items-center'>
               <div className='cursor-pointer block'>
                   <Link to="/dsqdgg/taodsqdgg">
-                    <ActionIcon icon={<AddPlus width="1.5rem" height="1.5rem"/>}/>
+                    <ActionIcon size='Small' icon={<AddPlus width="1.25rem" height="1.25rem"/>}/>
                   </Link>
               </div>                 
-              <ActionIcon icon={<SearchMagnifyingGlass width="1.5rem" height="1.5rem"/>} onClick={handleSearchIconClick}/>
-              <ActionIcon icon={<Filter width="1.5rem" height="1.5rem"/>} onClick={handleDiscountListFilterClick}/>
-              <ActionIcon icon={<ArrowDownUp width="1.5rem" height="1.5rem"/>} onClick={handleOptionIconClick}/>
+              <ActionIcon size='Small' icon={<SearchMagnifyingGlass width="1.25rem" height="1.25rem"/>} onClick={handleSearchIconClick}/>
+              <ActionIcon size='Small' icon={<Filter width="1.25rem" height="1.25rem"/>} onClick={handleDiscountListFilterClick}/>
+              <ActionIcon size='Small' icon={<ArrowDownUp width="1.25rem" height="1.25rem"/>} onClick={handleOptionIconClick}/>
             </div>
             {showOptionList && (
                 <div className="absolute top-[70px] right-[16px] z-50 bg-background-primary shadow-md rounded-md p-[12px]">
@@ -91,11 +90,11 @@ const DSQuyDinhGiamGia = () => {
             {showSearchBar && <SearchBar previewText='Tìm kiếm hoạt động'/>}                     
           </div>
           <div className='flex-auto block pb-1'>
-        <div className="flex w-full rounded-lg border border-outline-table">
-          <table className="table-auto w-full">
-            <thead> 
+        <div className="overflow-x-auto  table-auto w-full flex flex-col space-y-[32px] h-auto">
+          <table id='Table' class="overflow-x-auto w-full rounded-lg border border-outline-table">
+            <thead class="align-center"> 
             <tr class="title-small text-text-secondary text-center">
-                  <th class="pb-3 px-5 max-sm:pl-5 py-3 text-left min-w-[100px] ">ID</th>
+                  <th class="pb-3 px-10 max-sm:pl-5 py-3 text-start min-w-[100px]">ID</th>
                   <th class="pb-3 px-3 py-3 text-left min-w-[250px] ">Mô tả</th>
                   <th class="pb-3 px-3 py-3 text-middle min-w-[150px]">Phần trăm giảm giá mặc định (%)</th>
                   <th class="pb-3 px-3 py-3 text-middle min-w-[150px] ">Phần trăm giảm giá tối đa (%)</th>
@@ -107,7 +106,7 @@ const DSQuyDinhGiamGia = () => {
             <tbody>
               {qdgiamgias.map((DSQDGG, key) => 
               <tr key ={key} className="body-medium text-text-primary border-t border-solid last:border-b-0 text-middle">
-                <td class="text-left sm:pl-5 max-sm:pl-5 py-3 body-large">{DSQDGG.MaQuyDinhGiamGia}</td>
+                <td class="sm:pl-10 max-sm:pl-5 py-3 body-large text-left">{DSQDGG.MaQuyDinhGiamGia}</td>
                 <td class=" px-3 py-3 body-large text-left">{DSQDGG.MoTaLoaiGiamGia}</td>
                 <td class=" px-3 py-3 body-large text-center">{DSQDGG.PhanTramGiamGiaMacDinh}</td>
                 <td class=" px-3 py-3 body-large text-center">{DSQDGG.PhanTramGiamGiaToiDa}</td>
@@ -126,6 +125,7 @@ const DSQuyDinhGiamGia = () => {
           </table>
         </div>
       </div>
+      <div className='pt-2'><Pagination/></div>
       </div>
       
     </div>

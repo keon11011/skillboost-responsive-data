@@ -25,7 +25,7 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
   }, []);
 
   function getQuyDinhGiamGia() {
-    axios.get(`http://localhost:80/SkillBoost-API/api/QuyDinhGiamGia/read_single.php?MaQuyDinhGiamGia=${id}`).then(function (response) {
+    axios.get(`http://localhost:8080/SkillBoost-API/api/QuyDinhGiamGia/read_single.php?MaQuyDinhGiamGia=${id}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
     });
@@ -53,7 +53,7 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
   }
   
   function getNgheNghieps() {
-    axios.get('http://localhost:80/SkillBoost-API/api/NgheNghiep/read_all.php')
+    axios.get('http://localhost:8080/SkillBoost-API/api/NgheNghiep/read_all.php')
       .then(function(response) {
           setNgheNghieps(response.data);
       })
@@ -89,7 +89,7 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.patch('http://localhost:80/SkillBoost-API/api/QuyDinhGiamGia/update.php', inputs).then(function(response){
+    axios.patch('http://localhost:8080/SkillBoost-API/api/QuyDinhGiamGia/update.php', inputs).then(function(response){
         console.log(response.data);
         setShowSuccess(true);
         setTimeout(() => {
@@ -114,13 +114,13 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
           <div className='max-sm:hidden col-span-1'>
             <SidebarQL/>
           </div>
-          <div id ="ContentContainer" className='flex flex-col h-fit sm:col-span-6 max-sm:col-span-7 bg-background-secondary px-[64px] py-[32px] space-y-[24px]' >
+          <div id ="ContentContainer" className='flex flex-col h-fit sm:col-span-6 max-sm:col-span-7 bg-background-secondary sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]' >
             <div className="max-sm:hidden">
               <HeaderAdmin>Quy định giảm giá</HeaderAdmin>
             </div>
 
             {/* mobile responsive */}
-            <div className="sm:hidden max-sm:headline-medium max-sm:flex max-sm:space-x-[40px] ">
+            <div className="sm:hidden max-sm:headline-medium max-sm:flex max-sm:space-x-[30px] ">
               <Link to="/dsqdgg/xemchitietdsqdgg/">
               <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
               </Link>
@@ -217,17 +217,17 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
                   </div>
               </div>
             </div>
-            <div className="display:flex text-right  w-full place-items-right rounded-lg p-3 lg:overflow-visible">
-                    <div className=' relative bg-background-primary space-x-4 p-2 float-right'  >
-                      <Button type='submit' size="Medium" variant="Primary">Lưu thay đổi</Button>
-                    </div>
-                    <div className='relative bg-background-primary space-x-4 p-2 float-right'>
+            <div className="flex w-full justify-end rounded-lg lg:overflow-visible">
+                    <div className='relative bg-background-primary space-x-4 p-2'>
                       <div className='cursor-pointer block'>
                         <Link to={`/dsqdgg/xemchitietdsqdgg/${inputs.MaQuyDinhGiamGia}`}>
                           <Button type='submit' size="Medium" variant="Destructive-plain">Hủy thay đổi</Button>
                         </Link>
                       </div>
                     </div>
+                    <div className=' relative bg-background-primary space-x-4 p-2 '  >
+                      <Button type='submit' size="Medium" variant="Primary">Lưu thay đổi</Button>
+                    </div>      
                 </div>
                 </form>
             </div>
