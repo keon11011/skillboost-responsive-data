@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
+
 import Button from '../button/Button';
 const CourseListFilter = () => {
-    const [startDate, setStartDate] = useState(new Date());
+    const [startDate, setStartdate] = useState(new Date());
+    const formattedStartDate = startDate ? startDate.toLocaleDateString('en-CA') : undefined;
+
     const [width, setWidth] = useState(100);
     const changeWidth = (event) => {
       setWidth(event.target.value);
@@ -14,10 +16,10 @@ const CourseListFilter = () => {
         setRange({ min: values.min, max: values.max });
       };
   return (
-    <div className="w-full relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
-          <div className=" w-1/3 relative flex flex-col min-w-0 break-words border border-solid border-[#5200FF] rounded-2xl ">   
-          <div className="p-2 pl-8 w-fit">
-              <div className="pl- pt-5 pb-2 title-medium text-text-secondary">Giảng viên</div>
+    <div className="w-auto relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+          <div className=" w-auto relative flex flex-col min-w-0 break-words border border-solid border-[#5200FF] rounded-2xl ">   
+          <div className="p-2 w-fit">
+              <div className="pl-5 pt-5 pb-2 title-medium text-text-secondary">Giảng viên</div>
           
             <div className="p-2 grid grid-cols-2 gap-4">
               <div>
@@ -394,8 +396,14 @@ const CourseListFilter = () => {
 
             <div className="p-2 w-11/12 mx-auto  border-t border-1 border-grey"></div>
             <div className="p-2 pt-0 pl-8 w-fit">
-            <div className="title-medium text-text-secondary">Ngày khai giảng</div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showIcon />
+            <CustomDatePicker 
+                      id='NgayKhaiGiang'
+                      title='Ngày khai giảng'
+                      previewText='2024-12-07' 
+                      selectedDate={startDate}
+                      setSelectedDate={setStartdate}
+                    >
+            </CustomDatePicker>
             </div>
 
             <div className="p-2 w-11/12 mx-auto  border-t border-1 border-grey"></div>

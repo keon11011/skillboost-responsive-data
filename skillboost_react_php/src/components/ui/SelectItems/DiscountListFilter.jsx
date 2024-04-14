@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
 import Button from '../button/Button';
 import CaretDownMd from "../../icons/Arrow/CaretDownMd.jsx";
 import CaretUpMd from "../../icons/Arrow/CaretUpMd.jsx";
@@ -69,11 +68,15 @@ const DiscountListFilter = () => {
                 <div className="p-2 pb-0 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 
 
-                <div className="p-6 pb-3 w-fit">
-                    <div className="pl-3 title-medium text-text-secondary">Thời gian cập nhật</div>
-                    <div className="pl-3 ">
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} isClearable showIcon />
-                    </div>
+                <div className="p-4 w-fit pl-6">
+                        <CustomDatePicker 
+                            id='ThoiGianCapNhat'
+                            title='Thời gian cập nhật'
+                            previewText='2024-12-04'
+                            selectedDate={startDate}
+                            setSelectedDate={setStartDate}
+                        >
+                        </CustomDatePicker>
                 </div>
                 <div className="p-2 pb-0 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 

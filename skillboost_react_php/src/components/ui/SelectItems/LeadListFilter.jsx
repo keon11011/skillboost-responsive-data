@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import Calendar from "../../icons/Calendar/Calendar";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
+
 import Button from '../button/Button';
 
 const LeadListFilter = () => {
@@ -9,14 +8,20 @@ const LeadListFilter = () => {
    const [startDate, setStartDate] = useState(new Date());
   return (
 
-        <div class="w-full relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+        <div class="w-auto relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
           <div class=" w-auto relative flex flex-col min-w-0 break-words border border-solid border-[#5200FF] rounded-2xl ">   
-            <div class="p-2 pl-8 w-fit">
-              <div class="pl- pt-5 pb-2 title-medium text-text-secondary">Thời gian cập nhật</div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showIcon />
+            <div class="p-2 pl-8 pt-6 w-fit">
+                    <CustomDatePicker 
+                      id='ThoiGianCapNhat'
+                      title='Thời gian cập nhật'
+                      previewText='2024-12-07'
+                      selectedDate={startDate}
+                      setSelectedDate={setStartDate}
+                    >
+                    </CustomDatePicker>
             </div>
               
-            <div class="p-2 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
+            <div class="p-2 w-auto mx-auto  border-t border-1 border-outline-divider"></div>
 
             <div class="p-2 pt-0   w-fit">
             <div class="pl-6 title-medium text-text-secondary">Khóa học quan tâm</div>

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
 import Button from '../button/Button';
 
-const LeadListFilter = () => {
+const LeadActivityListFilter = () => {
     const [startDate, setStartDate] = useState(new Date());
 
     return (
 
-        <form className="w-full relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+        <form className="w-auto relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
             <div className=" w-auto relative flex flex-col min-w-0 break-words border border-solid border-[#5200FF] rounded-2xl ">
                 <div className="p-6 w-fit">
                     <div className="pl-3 pb-3 title-medium text-text-secondary">Loại hoạt động</div>
@@ -45,9 +44,15 @@ const LeadListFilter = () => {
                 <div className="p-2 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 
                 <div className="p-2 pt-0 w-fit">
-                    <div className="pl-6 title-medium text-text-secondary">Thời gian thực hiện</div>
                     <div className="pl-6 ">
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} isClearable showIcon/>
+                        <CustomDatePicker 
+                            id='ThoiGianThucHien'
+                            title='Thời gian thực hiện'
+                            previewText='2024-12-04'
+                            selectedDate={startDate}
+                            setSelectedDate={setStartDate}
+                        >
+                        </CustomDatePicker>
                     </div>
                 </div>
                 <div className="p-2 pb-0 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
@@ -105,4 +110,4 @@ const LeadListFilter = () => {
     );
 }
 
-export default LeadListFilter
+export default LeadActivityListFilter

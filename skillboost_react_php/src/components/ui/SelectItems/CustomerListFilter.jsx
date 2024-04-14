@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
 import Button from '../button/Button';
 
 const CustomerListFilter = () => {
@@ -9,13 +8,17 @@ const CustomerListFilter = () => {
 
     return (
 
-        <form className="w-full relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
+        <form className="w-auto relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
             <div className=" w-auto relative flex flex-col min-w-0 break-words border border-solid border-[#5200FF] rounded-2xl ">
-                <div className="p-6 pb-3 w-fit">
-                    <div className="pl-3 title-medium text-text-secondary">Thời gian cập nhật</div>
-                    <div className="pl-3 ">
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} isClearable showIcon />
-                    </div>
+                <div className="p-6  pl-9 pb-3 w-fit">
+                        <CustomDatePicker 
+                            id='ThoiGianCapNhat'
+                            title='Thời gian cập nhật'
+                            previewText='2003-12-07'
+                            selectedDate={startDate}
+                            setSelectedDate={setStartDate}
+                            >
+                        </CustomDatePicker>
                 </div>
                 <div className="p-2 pb-0 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 

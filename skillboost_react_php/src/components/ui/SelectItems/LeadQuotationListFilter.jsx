@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import Calendar from "../../icons/Calendar/Calendar";
-import "react-datepicker/dist/react-datepicker.css";
+import CustomDatePicker from '../placeholder/CustomDatePicker'
 import Button from '../button/Button';
 
 const LeadQuotationListFilter = () => {
@@ -104,9 +102,14 @@ const LeadQuotationListFilter = () => {
             <div class="p-2 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 
             <div class="pl-8 p-2 pt-0 w-fit">
-              <div class=" title-medium text-text-secondary">Thời gian cập nhật</div>
-              <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showIcon />
-            </div>
+              <CustomDatePicker 
+                id='ThoiGianCapNhat'
+                title='Thời gian cập nhật'
+                previewText='2024-12-04'
+                selectedDate={startDate}
+                setSelectedDate={setStartDate}
+              >
+              </CustomDatePicker>            </div>
         
             <div class="p-2 w-11/12 mx-auto  border-t border-1 border-outline-divider"></div>
 
