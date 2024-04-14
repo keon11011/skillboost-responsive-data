@@ -146,52 +146,40 @@ const DSLead_XemChiTietLead = () => {
     axios.get(`http://localhost:80/SkillBoost-API/api/Lead/read_single.php?MaLead=${id}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
+      // Store MaLead in localStorage
       localStorage.setItem('MaLead', response.data.MaLead);
       localStorage.setItem('HoTenLead', response.data.HoTenLead);
     });
   }
-
-  //Đẩy khóa học YCTV lên bảng hiển thị
-  const [selectedCourses, setSelectedCourses] = useState([]);
-
-    useEffect(() => {
-        getBaoGiaKhoaHoc();
-    }, []);
-
-    function getBaoGiaKhoaHoc() {
-        axios.get(`http://localhost:80/SkillBoost-API/api/KhoaHoc/read_khoahoc_in_yctv.php?MaLead=${id}`).then(function (response) {
-            console.log(response.data);
-            setSelectedCourses(response.data);
-        });
-    }
-  //console.log(id)
+    
+  console.log(inputs)
 
   return (
     <main id='TaoKH' className='w-full bg-background-secondary flex'>
       <div id='Sidebar' className='sticky top-0 h-screen max-sm:relative'>
         <SidebarQL/>
       </div>
-      <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+      <div id='ContentContainer' className='w-full h-full sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]'>
         <div id='Header'>
           <HeaderAdmin progressBar={<Nhantuvan />}>{inputs.HoTenLead}</HeaderAdmin>
         </div>
-        <div id="LeadInfoNavigation" className="flex space-x-[24px]">
+        <div id="LeadInfoNavigation" className="flex sm:space-x-[24px] max-sm:flex-col max-sm:space-y-[24px]">
           <div className="grow">
             <LeadInfoTab/>
           </div>
           {trangthaiLead(inputs.TrangThaiLead)}
         </div>
         <div id='ContentInside' className="w-full h-full rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border gap-[1rem] space-y-[24px]">
-          <div id='Header' className='flex justify-between items-center'>
+          <div id='Header' className='flex max-sm:flex-col sm:justify-between sm:items-center'>
             <div className='flex space-x-[16px] items-center'>
               <div className='cursor-pointer block'>
                 <Link to="/lead/thongtin">
                   <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem" />} />
                 </Link>
               </div>
-              <div className='text-text-primary title-large'>Thông tin Lead</div>
+              <div className='text-text-primary sm:title-large max-sm:title-medium'>Thông tin Lead</div>
             </div>
-            <div className="flex space-x-[12px]">
+            <div className="flex max-sm:pt-3 space-x-[12px] max-sm:justify-end">
               <div className='cursor-pointer block'>
                 <Link to={`/lead/thongtin/chinhsuachitietlead/${inputs.MaLead}`}>
                   <ActionPersonDetail variant="Edit" />
@@ -204,7 +192,7 @@ const DSLead_XemChiTietLead = () => {
 
           <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <TextInput variant='ReadOnly' title='Lead ID' showRedAsterisk value={inputs.MaLead} type="text" />
                 <TextInput variant='ReadOnly' title='Họ tên' showRedAsterisk value={inputs.HoTenLead} type="text" />
                 <DropDown
@@ -215,7 +203,7 @@ const DSLead_XemChiTietLead = () => {
                 >
                 </DropDown>
               </div>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <CustomDatePicker
                   variant='ReadOnly'
                   title='Ngày sinh'
@@ -238,7 +226,7 @@ const DSLead_XemChiTietLead = () => {
                   type="text"
                 />
               </div>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <DropDown
                   variant='ReadOnly'
                   title="Nghề nghiệp"
@@ -273,7 +261,7 @@ const DSLead_XemChiTietLead = () => {
               </div>
             </div>
             <div className='space-y-[16px]'>
-              <div className='title-medium text-text-primary'>Khóa học</div>
+              <div className='title-medium text-text-primary'>Khóa học đã mua</div>
               <div id='Table' className="overflow-x-auto rounded-lg border border-outline-table">
                 <table className="table-auto w-full">
                   <thead className='title-small text-text-secondary text-left'>
@@ -284,19 +272,11 @@ const DSLead_XemChiTietLead = () => {
                     </tr>
                   </thead>
                   <tbody className='body-medium text-text-primary'>
-                    {selectedCourses.length > 0 ? (
-                      selectedCourses.map((khoaHoc, key) => (
-                        <tr className="hover:bg-background-secondary border-b border-t" key={key}>
-                          <td className="px-[16px] py-[24px]">{khoaHoc.TenKhoaHoc}</td>
-                          <td className="px-[16px] py-[24px]">{khoaHoc.GiangVien}</td>
-                          <td className="w-[214px] px-[16px] py-[24px]">{khoaHoc.GiaTien}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr className="hover:bg-background-secondary border-b border-t">
-                        <td colSpan={3} className="px-[16px] py-[24px]">Chưa có khóa học</td>
-                      </tr>
-                    )}
+                    <tr>
+                      <td className="w-[649px] px-[16px] py-[24px]">IT Business Analyst</td>
+                      <td className="w-[649px] px-[16px] py-[24px]">Ryan Nguyễn</td>
+                      <td className="w-[214px] px-[16px] py-[24px]">4.000.000đ</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -305,14 +285,14 @@ const DSLead_XemChiTietLead = () => {
         </div>
         {showDeleteConfirmation && (
           <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
-            <div className="relative w-[535px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
+            <div className="relative w-[535px] max-sm:w-[350px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
               <div>
-                <div className='flex w-full justify-center title-large text-text-primary'>Xác nhận xóa Lead</div>
+                <div className='flex pt-1.5 sm:w-full max-sm:w-4/5 justify-center title-large text-text-primary'>Xác nhận xóa Lead</div>
                 <div className='absolute top-[36px] right-[36px]'>
                   <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelDelete} />} />
                 </div>
               </div>
-              <div className='flex flex-col space-y-[16px] w-[463px]'>
+              <div className='flex flex-col space-y-[16px] sm:w-[463px] max-sm:w-[286px]'>
                 <div className='h-[316px]'>
                   <TextArea title='Lý do xóa' previewText='Điền lý do' onChange={handleDeleteChange}/>
                 </div>
@@ -324,14 +304,14 @@ const DSLead_XemChiTietLead = () => {
         )}
         {showUnfollowConfirmation && (
           <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
-            <div className="relative w-[535px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
+            <div className="relative w-[535px] max-sm:w-[350px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
               <div>
-                <div className='flex w-full justify-center title-large text-text-primary'>Xác nhận hủy theo dõi</div>
+                <div className='flex pt-1.5 sm:w-full max-sm:w-4/5 justify-center title-large text-text-primary'>Xác nhận hủy theo dõi</div>
                 <div className='absolute top-[36px] right-[36px]'>
                   <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelUnfollow} />} />
                 </div>
               </div>
-              <div className='flex flex-col space-y-[16px] w-[auto]'>
+              <div className='flex flex-col space-y-[16px] sm:w-[463px] max-sm:w-[286px]'>
                 <div className='h-[316px]'>
                   <TextArea title='Lý do hủy theo dõi' previewText='Điền lý do' onChange={handleUnfollowChange}/>
                 </div>

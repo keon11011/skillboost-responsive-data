@@ -11,7 +11,7 @@ const CourseSelectorNew = ({ onSubmit, onClick, onCancel }) => {
     }, []);
 
     function getKhoaHocs() {
-        axios.get('http://localhost:80/SkillBoost-API/api/KhoaHoc/read_all.php')
+        axios.get('http://localhost:8080/SkillBoost-API/api/KhoaHoc/read_all.php')
             .then(response => {
                 const initialSelectedRows = response.data.reduce((acc, khoaHoc) => {
                     acc[khoaHoc.id] = false;

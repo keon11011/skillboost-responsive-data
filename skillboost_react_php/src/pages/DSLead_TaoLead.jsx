@@ -11,8 +11,6 @@ import TextInput from '../components/ui/placeholder/TextInput'
 import TextArea from '../components/ui/placeholder/TextArea'
 import CourseSelectorNew from '../components/ui/SelectItems/CourseSelectorNew'
 import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
-import InformSuccess from '../components/ui/inform/InformSuccess'
-import InformFailure from '../components/ui/inform/InformFailure'
 
 import AddPlus from '../components/icons/Edit/AddPlus'
 import ChevronLeft from '../components/icons/Arrow/ChevronLeft'
@@ -52,7 +50,7 @@ const DSLead_TaoLead = () => {
   }
 
   function getNgheNghieps() {
-    axios.get('http://localhost:80/SkillBoost-API/api/NgheNghiep/read_all.php')
+    axios.get('http://localhost:8080/SkillBoost-API/api/NgheNghiep/read_all.php')
       .then(function(response) {
           setNgheNghieps(response.data);
       })
@@ -85,67 +83,52 @@ const DSLead_TaoLead = () => {
     setInputs(values => ({...values, [id]: event.value}));
   }
 
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showFailure, setshowFailure] = useState(false);
-  
   //Xử lý ấn nút button Submit
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    axios.get(`http://localhost:8080/SkillBoost-API/api/Lead/read_new.php`)
+  .then(function (response2) {
+    console.log('get lead ID', response2.data);
+    //setLeadID(response2.data);
 
-    axios.post(`http://localhost:80/SkillBoost-API/api/Lead/create.php`, inputs)
-      .then(function(response) {
-          console.log('Tạo Lead sao rồi', response);
+    // Now that you have the lead ID, set TaoBoiLead and then create YeuCauTuVan
+    const updatedInputYCTVs = {...inputYCTVs, 'TaoBoiLead': response2.data.MaLead};
+    setinputYCTVs(updatedInputYCTVs); // Update inputYCTVs with TaoBoiLead
 
-          axios.get(`http://localhost:80/SkillBoost-API/api/Lead/read_new.php`)
-            .then(function (response2) {
-              console.log('Data của Lead', response2.data);
-              setLeadID(response2.data);
+    console.log('InputYCTV', updatedInputYCTVs); // Log updatedInputYCTVs
 
-              const updatedInputYCTVs = {...inputYCTVs, 'TaoBoiLead': response2.data.MaLead};
-              setinputYCTVs(updatedInputYCTVs); // Update inputYCTVs with TaoBoiLead
+    // Create YeuCauTuVan after setting TaoBoiL ead
+    axios.post('http://localhost:8080/SkillBoost-API/api/YeuCauTuVan/create.php', updatedInputYCTVs)
+      .then(function(response3){
+        console.log('Post YCTV', response3.data);
+        // navigate('/');
 
-              console.log('InputYCTV', updatedInputYCTVs); // Log updatedInputYCTVs
+        axios.get(`http://localhost:8080/SkillBoost-API/api/YeuCauTuVan/read_new.php`)
+          .then(function (response4) {
+            console.log('Tư Vấn ID', response4.data);
+            //setTuVanID(response4.data);
 
-              // Create YeuCauTuVan after setting TaoBoiLead
-              axios.post('http://localhost:80/SkillBoost-API/api/YeuCauTuVan/create.php', updatedInputYCTVs)
-                .then(function(response3){
-                  console.log('Post YCTV', response3.data);
-                  // navigate('/');
+            selectedCourses.forEach(item => {
+              axios.post('http://localhost:8080/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/create.php', item)
+                .then(function(response5){
+                  console.log('Khóa học thuộc YCTV', response5.data);
 
-                  axios.get(`http://localhost:80/SkillBoost-API/api/YeuCauTuVan/read_new.php`)
-                    .then(function (response4) {
-                      console.log('Tư Vấn ID', response4.data);
-                      //setTuVanID(response4.data);
-
-                      selectedCourses.forEach(item => {
-                        axios.post('http://localhost:80/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/create.php', item)
-                          .then(function(response5){
-                            console.log('Khóa học thuộc YCTV', response5.data);
-
-                            axios.patch('http://localhost:80/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/update_matuvan.php', response4.data)
-                              .then(function(response6){
-                            console.log('Đổi Mã tư vấn', response6.data);
-
-                            setShowSuccess(true);
-                            setTimeout(() => {
-                              setShowSuccess(false);
-                              navigate(`/lead/thongtin/xemchitietlead/${response2.data.MaLead}`);
-                            }, 2000);
-                            })
-                            .catch(function(error) {
-                              console.error('Error occurred:', error);
-                              setshowFailure(true);
-                              setTimeout(() => {
-                                setshowFailure(false);
-                              }, 2000);
-                            });
-                          });
-                      });
-                    });
+                  axios.patch('http://localhost:8080/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/update_matuvan.php', response4.data)
+                    .then(function(response6){
+                  console.log('Đổi Mã tư vấn', response6.data);
+                  
+                });
                 });
             });
           });
-      };
+      });
+  });
+};
+
+  // useEffect(() => {
+  //   setInputs(values => ({...values,'ChinhSuaLanCuoiBoi': localStorage.getItem('MaNV'),'TaoBoi': localStorage.getItem('MaNV')}));
+  // }, [])
   
   const handleCourseSelectorClick = () => {
     setShowCourseSelector(!showCourseSelector);
@@ -167,7 +150,7 @@ const DSLead_TaoLead = () => {
       <div id='Sidebar' className='sticky top-0 h-screen max-sm:relative'>
         <SidebarQL/>
       </div>
-      <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+      <div id='ContentContainer' className='w-full h-full sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]'>
         <div id='Header'>
           <HeaderAdmin>Lead</HeaderAdmin>
         </div>
@@ -179,12 +162,12 @@ const DSLead_TaoLead = () => {
                 <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
               </Link>
             </div>
-            <div className='text-text-primary title-large'>Tạo Lead mới</div>
+            <div className='text-text-primary sm:title-large max-sm:title-medium'>Tạo Lead mới</div>
           </div>
-          <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
+          <div id='Content' className='flex flex-col sm:space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
                 
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput
                       id='HoTenLead'
                       data-yctv='TenLeadYeuCau'
@@ -215,7 +198,7 @@ const DSLead_TaoLead = () => {
                       setSelectedDate={setselectedNgaySinh}
                     />
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput
                       id='SoDienThoaiLead'
                       data-yctv='SDTLeadYeuCau'
@@ -247,7 +230,7 @@ const DSLead_TaoLead = () => {
                         onHandleChange={handleNgheNghiepChange}
                     />
                 </div>
-                <div className='w-1/3 space-x-[24px]'>
+                <div className='sm:w-1/3 max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <DropDown
                         id='NguonLead'
                         title="Nguồn"
@@ -270,11 +253,11 @@ const DSLead_TaoLead = () => {
                 </div>
             </div>
             <div className='space-y-[16px]'>
-              <div className='title-medium text-text-primary'>Khóa học</div>
+              <div className='title-medium text-text-primary max-sm:pt-5'>Khóa học đã mua</div>
               <div id='Table' className="overflow-x-auto rounded-lg border border-outline-table">
                 <table className="table-auto w-full">
                   <thead className='title-small text-text-secondary text-left'>
-                    <tr>
+                    <tr className='border-b'>
                       <th className="w-[649px] px-[16px] py-[24px]">Tên khóa học</th>
                       <th className="w-[649px] px-[16px] py-[24px]">Giảng viên</th>
                       <th className="w-[214px] px-[16px] py-[24px]">Giá tiền</th>
@@ -292,10 +275,17 @@ const DSLead_TaoLead = () => {
                 </table>
               </div>
             </div>
-            <div className='flex w-full space-x-[12px] items-center justify-between'>
-              <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>
+            <div className='sm:hidden flex w-full space-x-[12px] items-center justify-start max-sm:pt-5'>
+            <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>
                 Thêm khóa học
+            </Button>
+            </div>
+            <div className='flex w-full space-x-[12px] items-center justify-end max-sm:pt-5'>
+              <div className="max-sm:hidden">
+              <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>
+                  Thêm khóa học
               </Button>
+              </div>
               <div className="flex space-x-[24px]">
                 <div className='cursor-pointer block'>
                   <Link to="/lead/thongtin">
@@ -303,22 +293,20 @@ const DSLead_TaoLead = () => {
                   </Link>
                 </div>
                   <Button type='submit' variant='Primary' size='Medium'>Xác nhận tạo</Button>
-                </div>
+              </div>
               </div>
             </div>
           </form>
         </div>
         </div>
         {showCourseSelector && (
-        <div className="absolute top-[396px] left-[500px] z-50">
+        <div className="absolute max-sm:w-[330px] max-sm:top-[1340px] max-sm:left-[30px] sm:top-[396px] sm:left-[500px] z-50">
           <CourseSelectorNew
             onSubmit={handleCourseSelection}
             onCancel={setShowCourseSelector}
           />
         </div>
         )}
-        {showSuccess && <InformSuccess>Tạo Lead thành công</InformSuccess>}
-        {showFailure && <InformFailure>Tạo theo dõi Lead thất bại</InformFailure>}
     </main>
   );
 };
