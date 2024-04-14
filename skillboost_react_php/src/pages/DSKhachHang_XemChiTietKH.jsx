@@ -176,7 +176,7 @@ const DSKhachHang_XemChiTietKH = () => {
                       >
                       </TextInput> 
                 </div>
-                <div className='space-x-[24px]'>
+                <div className='max-sm:w-fit space-x-[24px]'>
                     <TextArea
                         title='Ghi chú'
                         variant='ReadOnly'
