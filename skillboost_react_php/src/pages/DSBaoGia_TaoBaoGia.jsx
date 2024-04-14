@@ -286,6 +286,9 @@ const DSBaoGia_TaoBaoGia = () => {
       setBaoGiaInputs(values => ({...values, [id]: value}));
     }
 
+
+    const navigate = useNavigate()
+
     const handleSubmit = (event) => {
       event.preventDefault();
       
@@ -327,6 +330,7 @@ const DSBaoGia_TaoBaoGia = () => {
                                   setShowTaoBaoGiaSuccess(true);
                                   setTimeout(() => {
                                     setShowTaoBaoGiaSuccess(false);
+                                    navigate(`/lead/dsbaogia/${localStorage.getItem('MaLead')}/xemchitietbaogia/${response4.data.MaBaoGia}`)
                                   }, 2000);
             
                             })
@@ -389,8 +393,10 @@ const DSBaoGia_TaoBaoGia = () => {
                     .then(function(response10){
                       console.log('Đổi Mã báo giá (không mã giảm giá)', response10.data);
                       setShowTaoBaoGiaSuccess(true);
+
                       setTimeout(() => {
                         setShowTaoBaoGiaSuccess(false);
+                        navigate(`/lead/dsbaogia/${localStorage.getItem('MaLead')}/xemchitietbaogia/${response8.data.MaBaoGia}`)
                       }, 2000);
 
                 })

@@ -81,8 +81,22 @@ const DSKhachHang_XemChiTietKH = () => {
           }, 2000);
         })
     }
+    
+    //Đẩy khóa học YCTV lên bảng hiển thị
+    const [selectedCourses, setSelectedCourses] = useState([]);
 
-    console.log(deleteInputs)
+    useEffect(() => {
+        getBaoGiaKhoaHoc();
+    }, []);
+
+    function getBaoGiaKhoaHoc() {
+        axios.get(`http://localhost:80/SkillBoost-API/api/KhoaHoc/read_khoahoc_in_baogia.php?MaLead=${localStorage.getItem('MaLead')}`).then(function (response) {
+            console.log('Kết quả khóa học', response.data);
+            setSelectedCourses(response.data);
+        });
+    }
+
+    console.log(selectedCourses)
 
   return (
     <main id='TaoKH' className='w-full bg-background-secondary flex'>
@@ -206,11 +220,19 @@ const DSKhachHang_XemChiTietKH = () => {
                     </tr>
                   </thead>
                   <tbody className='body-medium text-text-primary'>
-                    <tr>
-                      <td className="w-[649px] px-[16px] py-[24px]">IT Business Analyst</td>
-                      <td className="w-[649px] px-[16px] py-[24px]">Ryan Nguyễn</td>
-                      <td className="w-[214px] px-[16px] py-[24px]">4.000.000đ</td>
-                    </tr>
+                  {selectedCourses.length > 0 ? (
+                      selectedCourses.map((khoaHoc, key) => (
+                        <tr className="hover:bg-background-secondary border-b border-t" key={key}>
+                          <td className="px-[16px] py-[24px]">{khoaHoc.TenKhoaHoc}</td>
+                          <td className="px-[16px] py-[24px]">{khoaHoc.GiangVien}</td>
+                          <td className="w-[214px] px-[16px] py-[24px]">{khoaHoc.GiaTien}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr className="hover:bg-background-secondary border-b border-t">
+                        <td colSpan={3} className="px-[16px] py-[24px]">Chưa có khóa học</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

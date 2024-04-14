@@ -31,6 +31,20 @@ const DSLead_HuyTheoDoiLead = () => {
     });
   }
 
+  //Đẩy khóa học YCTV lên bảng hiển thị
+  const [selectedCourses, setSelectedCourses] = useState([]);
+
+    useEffect(() => {
+        getBaoGiaKhoaHoc();
+    }, []);
+
+    function getBaoGiaKhoaHoc() {
+        axios.get(`http://localhost:80/SkillBoost-API/api/KhoaHoc/read_khoahoc_in_yctv.php?MaLead=${id}`).then(function (response) {
+            console.log(response.data);
+            setSelectedCourses(response.data);
+        });
+    }
+
   return (
     <main id='TaoKH' className='w-full bg-background-secondary flex'>
       <div id='Sidebar' className='sticky top-0 h-screen max-sm:relative'>
@@ -38,7 +52,7 @@ const DSLead_HuyTheoDoiLead = () => {
       </div>
       <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
         <div id='Header'>
-          <HeaderAdmin>Phan Văn Trị</HeaderAdmin>
+          <HeaderAdmin>{inputs.HoTenLead}</HeaderAdmin>
         </div>
         <div id="LeadInfoNavigation" className="flex space-x-[24px]">
           <div className="grow">
@@ -140,11 +154,13 @@ const DSLead_HuyTheoDoiLead = () => {
                     </tr>
                   </thead>
                   <tbody className='body-medium text-text-primary'>
-                    <tr>
-                      <td className="w-[649px] px-[16px] py-[24px]">IT Business Analyst</td>
-                      <td className="w-[649px] px-[16px] py-[24px]">Ryan Nguyễn</td>
-                      <td className="w-[214px] px-[16px] py-[24px]">4.000.000đ</td>
-                    </tr>
+                    {selectedCourses.map((khoaHoc, key) => (
+                      <tr className="hover:bg-background-secondary border-b border-t" key={key}>
+                        <td className="px-[16px] py-[24px]">{khoaHoc.TenKhoaHoc}</td>
+                        <td className="px-[16px] py-[24px]">{khoaHoc.GiangVien}</td>
+                        <td className="w-[214px] px-[16px] py-[24px]">{khoaHoc.GiaTien}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

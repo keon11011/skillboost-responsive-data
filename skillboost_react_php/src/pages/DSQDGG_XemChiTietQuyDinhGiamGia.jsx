@@ -151,7 +151,7 @@ const DSQDGG_XemChiTietQuyDinhGiamGia = () => {
                     id='MaNgheNghiep'
                     variant='ReadOnly'
                     title="Nghề nghiệp"
-                    value={formatValue(inputs.TenNgheNghiep)}
+                    value={formatValue(inputs.MaNgheNghiep)}
                     showRedAsterisk
                   >
                   </DropDown>

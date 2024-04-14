@@ -81,11 +81,11 @@ const DSKhoaHoc_XemChiTietKhoaHoc = () => {
               {thongTinKhoaHocs.TenKhoaHoc}
             </div>
             <div className='space-x-4 flex max-sm:w-fit'>
-              <Link to={`/khoahocAdmin/ctkhoahoc/chinhsua/${id}`}>
+              {/* <Link to={`/khoahocAdmin/ctkhoahoc/chinhsua/${id}`}>
                 <ActionPersonDetail variant="Edit" icon={<EditPencil01 width="1.5rem" height="1.5rem"/>}/>
-              </Link>
-                <ActionPersonDetail variant="Delete" icon={<TrashFull width="1.5rem" height="1.5rem"/>}
-                  onClick={handleConfirmDelete}/>
+              </Link> */}
+                {/* <ActionPersonDetail variant="Delete" icon={<TrashFull width="1.5rem" height="1.5rem"/>}
+                  onClick={handleConfirmDelete}/> */}
             </div>
         </div>
       </div>

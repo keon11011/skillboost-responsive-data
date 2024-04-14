@@ -165,7 +165,7 @@ const DSQDGG_ChinhSuaQuyDinhGiamGia = () => {
                       <DropDown 
                         id='MaNgheNghiep'
                         title="Nghề nghiệp"
-                        value={inputs.TenNgheNghiep}
+                        value={inputs.MaNgheNghiep}
                         showRedAsterisk
                         options={NgheNghieps.map((NgheNghiep) => ({
                           label: NgheNghiep.TenNgheNghiep,

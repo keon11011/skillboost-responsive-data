@@ -121,28 +121,6 @@ const DSLead_ChinhSuaChiTietLead = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFailure, setshowFailure] = useState(false);
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    axios.put('http://localhost:80/SkillBoost-API/api/Lead/update.php', inputs).then(function(response){
-        console.log(response.data);
-        setShowSuccess(true);
-        setTimeout(() => {
-          setShowSuccess(false);
-          navigate(`/lead/thongtin/xemchitietlead/${id}`);
-        }, 2000);
-        })
-        .catch(function(error) {
-          console.error('Error occurred:', error);
-          setShowFailure(true);
-          setTimeout(() => {
-            setShowFailure(false);
-          }, 2000);
-        })
-    }
-
     //Đẩy khóa học YCTV lên bảng hiển thị
     const [selectedCourses, setSelectedCourses] = useState([]);
 
@@ -166,6 +144,65 @@ const DSLead_ChinhSuaChiTietLead = () => {
       console.log("Khóa học được chọn:", selectedCourses); // Check if this logs the selected courses array
       setSelectedCourses(selectedCourses);
     };
+
+    const navigate = useNavigate();
+
+  //Xử lý submit
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios.put('http://localhost:80/SkillBoost-API/api/Lead/update.php', inputs)
+    .then(function(response) {
+
+        console.log('Chỉnh sửa thông tin Lead', response.data);
+
+        axios.get(`http://localhost:80/SkillBoost-API/api/YeuCauTuVan/read_new.php`)
+        .then(function(response2) {
+            console.log('Mã tư vấn', response2.data);
+
+            axios.delete(`http://localhost:80/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/delete.php?MaTuVan=${response2.data.MaTuVan}`)
+            .then(function(responsedelete) {
+                console.log('Deleted Data', responsedelete.data);
+
+                selectedCourses.forEach(item => {
+                    axios.post('http://localhost:80/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/create.php', item)
+                    .then(function(response3) {
+                        console.log('Khóa học thuộc YCTV', response3.data);
+
+                        axios.patch('http://localhost:80/SkillBoost-API/api/ChiTietKhoaHocThuocYCTV/update_matuvan.php', response2.data)
+                        .then(function(response6) {
+                            console.log('Đổi Mã tư vấn', response2.data);
+
+                            setShowSuccess(true);
+                            setTimeout(() => {
+                                setShowSuccess(false);
+                                navigate(`/lead/thongtin/xemchitietlead/${id}`);
+                            }, 2000);
+                        })
+                        .catch(function(error) {
+                            console.error('Error occurred:', error);
+                            setshowFailure(true);
+                            setTimeout(() => {
+                                setshowFailure(false);
+                            }, 2000);
+                        });
+                    });
+                });
+            })
+            .catch(function(error) {
+                console.error('Error occurred:', error);
+            });
+        })
+        .catch(function(error) {
+            console.error('Error occurred:', error);
+        });
+    })
+    .catch(function(error) {
+        console.error('Error occurred:', error);
+    });
+}
+
+
 
     console.log(id);
   
