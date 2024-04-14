@@ -4,7 +4,6 @@ import SearchMagnifyingGlass from '../../icons/Interface/SearchMagnifyingGlass';
 
 const SearchBarWrapper = styled.div`
   position: relative;
-  width: 20.375rem;
   height: 3rem;
   border-radius: 0.5rem;
   background-color: #FAFAFA;
@@ -36,7 +35,7 @@ const SearchBarComponent = styled.input`
 
 const Searchbar = ({ previewText, ...rest }) => {
   return (
-    <SearchBarWrapper>
+    <SearchBarWrapper className='sm:w-[20.375rem]'>
       <IconWrapperLeft><SearchMagnifyingGlass width="1.25rem" height="1.25rem" stroke='#5E6A6E'/></IconWrapperLeft>
       <SearchBarComponent
         type="text"
