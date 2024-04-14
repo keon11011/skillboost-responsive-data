@@ -12,8 +12,6 @@ import TextInput from '../components/ui/placeholder/TextInput'
 import TextArea from '../components/ui/placeholder/TextArea'
 import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
 import AlertInfo from '../components/ui/inform/AlertInfo';
-import InformSuccess from '../components/ui/inform/InformSuccess'
-import InformFailure from '../components/ui/inform/InformFailure'
 
 import ChevronLeft from '../components/icons/Arrow/ChevronLeft'
 import CloseMd from '../components/icons/Menu/CloseMd'
@@ -42,7 +40,7 @@ const DSKhachHang_XemChiTietKH = () => {
   }, []);
 
   function getKH() {
-    axios.get(`http://localhost:80/SkillBoost-API/api/KhachHang/read_single.php?MaKH=${id}`).then(function (response) {
+    axios.get(`http://localhost:8080/SkillBoost-API/api/KhachHang/read_single.php?MaKH=${id}`).then(function (response) {
       console.log(response.data);
       setInputs(response.data);
     });
@@ -54,23 +52,17 @@ const DSKhachHang_XemChiTietKH = () => {
   const [showSuccessDelete, setShowSuccessDelete] = useState(false);
   const [showFailureDelete, setshowFailureDelete] = useState(false);
 
-  const handleDeleteChange = (event) => {
-    const value = event.target.value;
-    setDeleteInputs(values => ({...values, 'LyDoTrangThaiLead': value}));
-  }
-
-
   const navigate = useNavigate()
 
   const handleDelete = (event) => {
     event.preventDefault();
 
-    axios.patch('http://localhost:80/SkillBoost-API/api/KhachHang/delete.php', deleteInputs).then(function(response){
+    axios.patch('http://localhost:8080/SkillBoost-API/api/KhachHang/delete.php', deleteInputs).then(function(response){
         console.log(response.data);
         setShowSuccessDelete(true);
         setTimeout(() => {
           setShowSuccessDelete(false);
-          navigate(`//khachhang`);
+          navigate(`/dsqdgg`);
         }, 2000);
         })
         .catch(function(error) {
@@ -82,14 +74,12 @@ const DSKhachHang_XemChiTietKH = () => {
         })
     }
 
-    console.log(deleteInputs)
-
   return (
     <main id='TaoKH' className='w-full bg-background-secondary flex'>
       <div id='Sidebar' className='sticky top-0 h-screen  max-sm:relative'>
         <SidebarQL/>
       </div>
-      <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+      <div id='ContentContainer' className='w-full h-full sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]'>
         <div id='Header'>
           <HeaderAdmin>{inputs.HoTenKH}</HeaderAdmin>
         </div>
@@ -101,7 +91,7 @@ const DSKhachHang_XemChiTietKH = () => {
                           <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
                         </Link>
                     </div>
-                    <div className='text-text-primary title-large'>Thông tin khách hàng</div>
+                    <div className='text-text-primary sm:title-large max-sm:title-medium'>Thông tin khách hàng</div>
                 </div>
                 <div className="flex space-x-[12px]">
                     <div className='cursor-pointer block'>
@@ -115,7 +105,7 @@ const DSKhachHang_XemChiTietKH = () => {
           
           <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput 
                       variant='ReadOnly'
                       title='ID khách hàng' 
@@ -137,7 +127,7 @@ const DSKhachHang_XemChiTietKH = () => {
                       >
                       </TextInput>
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <DropDown
                         variant='ReadOnly'
                         title="Giới tính"
@@ -162,7 +152,7 @@ const DSKhachHang_XemChiTietKH = () => {
 
                     </TextInput>
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput 
                       variant='ReadOnly' 
                       title='Email'
@@ -220,16 +210,16 @@ const DSKhachHang_XemChiTietKH = () => {
         </div>
         {showDeleteConfirmation && (
           <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
-            <div className="relative w-[535px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
+            <div className="relative w-[535px] max-sm:w-[350px] flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">
               <div>
-              <div className='flex w-full justify-center title-large text-text-primary'>Xác nhận xóa khách hàng</div>
+              <div className='flex sm:w-full max-sm:w-4/5 justify-center title-large text-text-primary'>Xác nhận xóa khách hàng</div>
               <div className='absolute top-[36px] right-[36px]'>
               <ActionIcon size="Medium" icon={<CloseMd width="1.5rem" height="1.5rem" onClick={handleCancelDelete}/>} />
               </div>
               </div>
-              <div className='flex flex-col space-y-[16px] w-[463px]'>
+              <div className='flex flex-col space-y-[16px] sm:w-[463px] max-sm:w-[286px]'>
                 <div className='h-[316px]'>
-                  <TextArea title='Lý do xóa' previewText='Điền lý do' onChange={handleDeleteChange}/>
+                  <TextArea title='Lý do xóa' previewText='Điền lý do' onChange={setDeleteInputs}/>
                 </div>
                 <AlertInfo>Xóa khách hàng có thể được khôi phục, vui lòng liên hệ bộ phận IT</AlertInfo>
               </div>

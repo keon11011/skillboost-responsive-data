@@ -46,7 +46,7 @@ const DSKhachHang_BangKH = () => {
     }, []);
 
     function getCustomers() {
-        axios.get('http://localhost:80/SkillBoost-API/api/KhachHang/read_all.php').then(function(response) {
+        axios.get('http://localhost:8080/SkillBoost-API/api/KhachHang/read_all.php').then(function(response) {
             console.log(response.data);
             setCustomers(response.data);
         });
@@ -57,14 +57,14 @@ const DSKhachHang_BangKH = () => {
         <div id='SidebarQL' className='sticky top-0 h-screen max-sm:relative'>
             <SidebarQL/>
         </div>
-        <div id ="ContentContainer" className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+        <div id ="ContentContainer" className='w-full h-full sm:px-[64px] max-sm:px-[30px] sm:py-[32px] max-sm:py-[20px] space-y-[24px]'>
         <div>
             <HeaderAdmin>Khách hàng</HeaderAdmin>
         </div>
         <div className="relative w-full h-auto rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border gap-[1rem] space-y-[36px]">
             <div className='flex justify-between h-[30px] '>
-                <div className="flex items-center title-large">Danh sách khách hàng</div>
-                {showSearchBar && <SearchBar previewText='Tìm kiếm Khách hàng'/>}
+                <div className="flex items-center sm:title-large max-sm:title-medium">Danh sách khách hàng</div>
+                <div className="max-sm:hidden">{showSearchBar && <SearchBar previewText='Tìm kiếm Khách hàng'/>}</div>
                 <div className='flex space-x-[16px] items-center'>
                     {/* <div className='cursor-pointer block'>
                         <Link to="/khachhang/taokhachhang">
@@ -86,8 +86,11 @@ const DSKhachHang_BangKH = () => {
                     )}
                 </div>
             </div>
-            <div id='Content' className='flex flex-col space-y-[32px] w-full h-auto'>
-                <div id='Table' className="flex w-full rounded-lg border border-outline-table">
+            <div className='sm:hidden'>            
+            {showSearchBar && <SearchBar previewText='Tìm kiếm Khách hàng'/>}                     
+            </div>
+            <div id='Content' className='overflow-x-auto table-auto flex flex-col space-y-[32px] w-full h-auto'>
+                <div id='Table' className="overflow-x-auto w-full rounded-lg border border-outline-table">
                     <table className="table-auto w-full">
                         <thead className='title-small text-text-secondary text-left'> 
                             <tr>
@@ -127,7 +130,7 @@ const DSKhachHang_BangKH = () => {
                     </table>
                 </div>
                 {showCustomerListFilter && 
-                <div className="absolute top-[16px] right-[40px] z-50">
+                <div className="absolute top-[16px] max-sm:w-[400px] max-sm:right-[-30px] sm:right-[40px] z-50">
                     <CustomerListFilter/>
                 </div>
                 }
