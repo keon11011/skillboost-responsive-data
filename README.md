@@ -1,5 +1,5 @@
 # skillboost-responsive-data
-1. Clone repo về
+1. Clone repo về trong folder htdocs của XAMPP
 2. Dichong gửi file UI Desktop có tích hợp API
 3. Cài đặt react-router-dom, axios, test API (xem thêm link https://docs.google.com/document/d/1hIQaxN6jvslASicL50biGeW7S1QmY3pQTA9zTYWgWes/edit?usp=sharing )
 3. Ai làm responsive phần đó (tạm gọi là X) thì copy code Tailwind Responsive vào file Dichong vừa gửi.
