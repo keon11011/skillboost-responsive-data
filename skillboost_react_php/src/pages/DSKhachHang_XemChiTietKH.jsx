@@ -103,7 +103,7 @@ const DSKhachHang_XemChiTietKH = () => {
       <div id='Sidebar' className='sticky top-0 h-screen  max-sm:relative'>
         <SidebarQL/>
       </div>
-      <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+      <div id='ContentContainer' className='w-full h-full sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]'>
         <div id='Header'>
           <HeaderAdmin>{inputs.HoTenKH}</HeaderAdmin>
         </div>
@@ -115,7 +115,7 @@ const DSKhachHang_XemChiTietKH = () => {
                           <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
                         </Link>
                     </div>
-                    <div className='text-text-primary title-large'>Thông tin khách hàng</div>
+                    <div className='text-text-primary sm:title-large max-sm:title-medium'>Thông tin khách hàng</div>
                 </div>
                 <div className="flex space-x-[12px]">
                     <div className='cursor-pointer block'>
@@ -129,7 +129,7 @@ const DSKhachHang_XemChiTietKH = () => {
           
           <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput 
                       variant='ReadOnly'
                       title='ID khách hàng' 
@@ -151,7 +151,7 @@ const DSKhachHang_XemChiTietKH = () => {
                       >
                       </TextInput>
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <DropDown
                         variant='ReadOnly'
                         title="Giới tính"
@@ -176,7 +176,7 @@ const DSKhachHang_XemChiTietKH = () => {
 
                     </TextInput>
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput 
                       variant='ReadOnly' 
                       title='Email'

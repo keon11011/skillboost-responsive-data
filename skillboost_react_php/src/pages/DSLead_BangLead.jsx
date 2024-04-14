@@ -67,18 +67,18 @@ const DSLead_BangLead = () => {
       }
 
     return (
-    <main id = "DSLead" className='relative w-full bg-background-secondary flex'>
+    <main id = "DSLead" className='w-full bg-background-secondary flex'>
         <div id='SidebarQL' className='sticky top-0 h-screen max-sm:relative'>
             <SidebarQL/>
         </div>
-        <div id ="ContentContainer" className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+        <div id ="ContentContainer" className='w-full h-full sm:px-[64px] max-sm:px-[30px] sm:py-[32px] max-sm:py-[20px] space-y-[24px]'>
         <div>
             <HeaderAdmin>Lead</HeaderAdmin>
         </div>
         <div className="relative w-full h-auto rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border gap-[1rem] space-y-[36px]">
             <div className='flex justify-between h-[30px] '>
-                <div className="flex items-center title-large">Danh sách Lead</div>
-                {showSearchBar && <SearchBar previewText='Tìm kiếm Lead'/>}
+                <div className="flex items-center sm:title-large max-sm:title-medium">Danh sách Lead</div>
+                <div className="max-sm:hidden">{showSearchBar && <SearchBar previewText='Tìm kiếm Lead'/>}</div>
                 <div className='flex space-x-[16px] items-center'>
                     <div className='cursor-pointer block'>
                         <Link to="/lead/thongtin/taolead">
@@ -88,7 +88,8 @@ const DSLead_BangLead = () => {
                     <ActionIcon size='Small' icon={<SearchMagnifyingGlass width="1.25rem" height="1.25rem"/>} onClick={handleSearchIconClick}/>
                     <ActionIcon size='Small' icon={<Filter width="1.25rem" height="1.25rem"/>} onClick={handleFilterIconClick}/>
                     <ActionIcon size='Small' icon={<ArrowDownUp width="1.25rem" height="1.25rem"/>} onClick={handleOptionIconClick}/>
-                    {showOptionList && (
+                </div>
+                {showOptionList && (
                         <div className="absolute top-[56px] right-[16px] z-50 bg-background-primary shadow-md rounded-md p-[12px]">
                             <ul>
                                 <li className='title-medium text-text-secondary p-[12px] text-right hover:bg-background-third cursor-pointer' onClick={() => handleSortOptionSelect('Option 1')}>Từ A-Z</li>
@@ -98,19 +99,21 @@ const DSLead_BangLead = () => {
                             </ul>
                         </div>
                     )}
-                </div>
             </div>
-            <div id='Content' className='flex flex-col space-y-[32px] w-full h-auto'>
-                <div id='Table' className="flex w-full rounded-lg border border-outline-table">
+            <div className='sm:hidden'>            
+            {showSearchBar && <SearchBar previewText='Tìm kiếm Lead'/>}                     
+            </div>
+            <div id='Content' className='overflow-x-auto table-auto flex flex-col space-y-[32px] w-full h-auto'>
+                <div id='Table' className="overflow-x-auto w-full rounded-lg border border-outline-table">
                     <table className="table-auto w-full">
                         <thead className='title-small text-text-secondary text-left'> 
                             <tr>
-                                <th class="px-[16px] py-[24px]">Lead ID</th>
-                                <th class="px-[16px] py-[24px]">Tên Lead</th>
-                                <th class="px-[16px] py-[24px] text-center">Thời gian cập nhật gần nhất</th>
-                                <th class="px-[16px] py-[24px] text-center">Email</th>
-                                <th class="px-[16px] py-[24px] text-center">Trạng thái</th>
-                                <th class="px-[16px] py-[24px] text-center"></th>
+                                <th class="px-[16px] py-[24px] min-w-[100px]">Lead ID</th>
+                                <th class="px-[16px] py-[24px] min-w-[250px]">Tên Lead</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px] text-center">Thời gian cập nhật gần nhất</th>
+                                <th class="px-[16px] py-[24px] min-w-[200px] text-center">Email</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px] text-center">Trạng thái</th>
+                                <th class="px-[16px] py-[24px] min-w-[50px] text-center"></th>
                             </tr>             
                         </thead>
                         <tbody className='body-medium text-text-primary'>
@@ -141,7 +144,7 @@ const DSLead_BangLead = () => {
                     </table>
                 </div>
                 {showLeadListFilter && 
-                <div className="absolute top-[16px] right-[40px] z-50">
+                <div className="absolute max-sm:w-[370px] top-[16px] sm:left-[850px] max-sm:left-[-20px] z-50">
                     <LeadListFilter/>
                 </div>
                 }

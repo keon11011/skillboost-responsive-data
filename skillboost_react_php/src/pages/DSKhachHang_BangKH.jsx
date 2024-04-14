@@ -57,13 +57,13 @@ const DSKhachHang_BangKH = () => {
         <div id='SidebarQL' className='sticky top-0 h-screen max-sm:relative'>
             <SidebarQL/>
         </div>
-        <div id ="ContentContainer" className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+        <div id ="ContentContainer" className='w-full h-full sm:px-[64px] max-sm:px-[30px] sm:py-[32px] max-sm:py-[20px] space-y-[24px]'>
         <div>
             <HeaderAdmin>Khách hàng</HeaderAdmin>
         </div>
         <div className="relative w-full h-auto rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border gap-[1rem] space-y-[36px]">
             <div className='flex justify-between h-[30px] '>
-                <div className="flex items-center title-large">Danh sách khách hàng</div>
+                <div className="flex items-center sm:title-large max-sm:title-medium">Danh sách khách hàng</div>
                 {showSearchBar && <SearchBar previewText='Tìm kiếm Khách hàng'/>}
                 <div className='flex space-x-[16px] items-center'>
                     {/* <div className='cursor-pointer block'>
@@ -87,15 +87,15 @@ const DSKhachHang_BangKH = () => {
                 </div>
             </div>
             <div id='Content' className='flex flex-col space-y-[32px] w-full h-auto'>
-                <div id='Table' className="flex w-full rounded-lg border border-outline-table">
+                <div id='Table' className='overflow-x-auto table-auto flex flex-col space-y-[32px] w-full h-auto'>
                     <table className="table-auto w-full">
                         <thead className='title-small text-text-secondary text-left'> 
                             <tr>
-                                <th class="px-[16px] py-[24px]">ID khách hàng</th>
-                                <th class="px-[16px] py-[24px]">Tên khách hàng</th>
-                                <th class="px-[16px] py-[24px] text-center">Thời gian cập nhật gần nhất</th>
-                                <th class="px-[16px] py-[24px] text-center">Số điện thoại</th>
-                                <th class="px-[16px] py-[24px] text-center">Email</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px]">ID khách hàng</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px]">Tên khách hàng</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px] text-center">Thời gian cập nhật gần nhất</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px] text-center">Số điện thoại</th>
+                                <th class="px-[16px] py-[24px] min-w-[150px] text-center">Email</th>
                                 <th class="px-[16px] py-[24px] text-center"> </th>
                             </tr>             
                         </thead>
@@ -114,7 +114,7 @@ const DSKhachHang_BangKH = () => {
                                 <td class="px-[16px] py-[24px] text-center">{customer.ChinhSuaLanCuoiVaoLuc}</td>
                                 <td class="px-[16px] py-[24px] text-center">{customer.SoDienThoaiKH}</td>
                                 <td class="px-[16px] py-[24px] text-center">{customer.EmailKH}</td>
-                                <td class="items-center text-center">
+                                <td class="w-[24px] items-center text-center">
                                     <div className='cursor-pointer block'>
                                         <Link to={`/khachhang/xemchitietkhachhang/${customer.MaKH}`}>
                                             <ActionIcon size='Small' icon={<ChevronRight width="1rem" height="1rem"/>} />

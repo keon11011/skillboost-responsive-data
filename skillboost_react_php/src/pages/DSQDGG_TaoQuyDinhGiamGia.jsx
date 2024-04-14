@@ -102,12 +102,16 @@ const DSQDGG_TaoQuyDinhGiamGia = () => {
         <div className='max-sm:hidden col-span-1'>
           <SidebarQL/>
         </div>
-        <div id ="ContentContainer" className='flex flex-col h-fit sm:col-span-6 max-sm:col-span-7 bg-background-secondary px-[64px] max-sm:py-[15px] sm:py-[32px] space-y-[24px]' >
+        <div id ="ContentContainer" className='flex flex-col h-fit sm:col-span-6 max-sm:col-span-7 bg-background-secondary sm:px-[64px] max-sm:px-[40px] max-sm:py-[15px] sm:py-[32px] space-y-[24px]'>
           <div className="max-sm:hidden">
             <HeaderAdmin>Quy định giảm giá</HeaderAdmin>
           </div>
           <div className="sm:hidden max-sm:headline-medium max-sm:flex  max-sm:space-x-[65px]">
-            <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
+              <div className='cursor-pointer block'>
+                  <Link to="/dsqdgg">
+                    <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem"/>}/>
+                  </Link>
+              </div>
             <div className="max-sm:font-bold max-sm:text-center max-sm:pt-1">Tạo quy định giảm giá</div>
           </div>
           <div className='w-full h-full relative rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] flex-col items-start justify-between p-6 gap-[24px] '>
@@ -141,7 +145,7 @@ const DSQDGG_TaoQuyDinhGiamGia = () => {
                     <TextInput id='SoLuongKhoaHocDangKy' onChange={handleTextChange} title="Số lượng khóa học đăng kí" showRedAsterisk previewText="Số lượng khóa học đăng kí" />
                   </div>
 
-                  <div className='w-1/2 sm:flex-col max-sm:flex-row pb-2'>
+                  <div className='sm:w-1/2 sm:flex-col max-sm:flex-row max-sm:space-y-4 pb-2'>
                     <DropDown  
                       id="NgheNghiepLead"
                       title="Nghề nghiệp"
@@ -157,7 +161,7 @@ const DSQDGG_TaoQuyDinhGiamGia = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 flex max-sm:flex-col w-full sm:space-x-4">
+                <div className="pt-4 flex max-sm:flex-col w-full sm:space-x-4 max-sm:space-y-4">
                   <div className='sm:w-1/4 flex-col pb-2 '>
                     <div className='pb-2 title-medium text-text-secondary'>Phần trăm giảm giá mặc định <text className='text-red-600'>*</text></div>
                     <TextInput id='PhanTramGiamGiaMacDinh' onChange={handleTextChange} previewText="Phần trăm giảm giá mặc định (%)" />
@@ -194,17 +198,17 @@ const DSQDGG_TaoQuyDinhGiamGia = () => {
             </div>
 
           </div>
-          <div className="  display:flex text-right  w-full place-items-right rounded-lg p-3 lg:overflow-visible">
-                  <div className=' relative bg-background-primary space-x-4 p-2 float-right'  >
-                    <Button size="Medium" variant="Primary" type='submit'>Xác nhận tạo</Button>
-                    
-                  </div>
+          <div className="flex w-full justify-end rounded-lg lg:overflow-visible ">
                   <div className='relative bg-background-primary space-x-4 p-2 float-right'>
                     <div className='cursor-pointer block'>
                       <Link to="/dsqdgg">
                         <Button size="Medium" variant="Destructive-plain">Hủy tạo</Button>
                       </Link>
                     </div>
+                  </div>
+                  <div className=' relative bg-background-primary space-x-4 p-2 float-right'  >
+                    <Button size="Medium" variant="Primary" type='submit'>Xác nhận tạo</Button>
+                    
                   </div>
               </div>
               </form>

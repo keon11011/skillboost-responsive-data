@@ -7,7 +7,7 @@ const CourseCard = ({coursepic, coursename, teachername, starrate, price}) => {
                         className="duration-500 ease-in-out hover:scale-110"
                         src={coursepic}
                         alt="Hình khóa học"
-                        width={400}
+                        width={350}
                         height={200}
                     />
                 </div>
@@ -47,7 +47,3 @@ const CourseCard = ({coursepic, coursename, teachername, starrate, price}) => {
     )
 }
 export default CourseCard
-
-
-
-

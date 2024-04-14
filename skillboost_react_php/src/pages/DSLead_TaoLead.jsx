@@ -181,10 +181,10 @@ const DSLead_TaoLead = () => {
             </div>
             <div className='text-text-primary title-large'>Tạo Lead mới</div>
           </div>
-          <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
+          <div id='Content' className='flex flex-col sm:space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
                 
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput
                       id='HoTenLead'
                       data-yctv='TenLeadYeuCau'
@@ -215,7 +215,7 @@ const DSLead_TaoLead = () => {
                       setSelectedDate={setselectedNgaySinh}
                     />
                 </div>
-                <div className='flex space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <TextInput
                       id='SoDienThoaiLead'
                       data-yctv='SDTLeadYeuCau'
@@ -247,7 +247,7 @@ const DSLead_TaoLead = () => {
                         onHandleChange={handleNgheNghiepChange}
                     />
                 </div>
-                <div className='w-1/3 space-x-[24px]'>
+                <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                     <DropDown
                         id='NguonLead'
                         title="Nguồn"
@@ -292,10 +292,17 @@ const DSLead_TaoLead = () => {
                 </table>
               </div>
             </div>
-            <div className='flex w-full space-x-[12px] items-center justify-between'>
+            <div className='sm:hidden flex w-full space-x-[12px] items-center justify-start max-sm:pt-5'>
+            <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>
+                Thêm khóa học
+            </Button>
+            </div>
+            <div className='flex w-full space-x-[12px] items-center justify-end max-sm:pt-5'>
+            <div className="max-sm:hidden">
               <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5}/>} onClick={handleCourseSelectorClick}>
                 Thêm khóa học
               </Button>
+              </div>
               <div className="flex space-x-[24px]">
                 <div className='cursor-pointer block'>
                   <Link to="/lead/thongtin">
@@ -305,6 +312,7 @@ const DSLead_TaoLead = () => {
                   <Button type='submit' variant='Primary' size='Medium'>Xác nhận tạo</Button>
                 </div>
               </div>
+
             </div>
           </form>
         </div>

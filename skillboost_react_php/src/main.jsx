@@ -8,9 +8,9 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom'
 
 import TrangChu_DSKhoaHoc from './pages/TrangChu_DSKhoaHoc.jsx'
 import DangNhap from './pages/DangNhap.jsx'
-import Chitietkhoahoc from './pages/Chitietkhoahoc.jsx'
-import Thanh_toan from './pages/Thanh_toan.jsx'
-import Thanh_toan2 from './pages/Thanh_toan2.jsx'
+import ChiTietKhoaHoc from './pages/ChiTietKhoaHoc.jsx'
+import ThanhToan from './pages/ThanhToan.jsx'
+import ThanhToan2 from './pages/ThanhToan2.jsx'
 
 import Dashboard from './pages/Dashboard.jsx'
 
@@ -45,18 +45,21 @@ import DSKhoaHoc_TaoKhoaHoc from './pages/DSKhoaHoc_TaoKhoaHoc.jsx'
 import DSKhoaHoc_XemChiTietKhoaHoc from './pages/DSKhoaHoc_XemChiTietKhoaHoc.jsx'
 import DSKhoaHoc_ChinhSuaKhoaHoc from './pages/DSKhoaHoc_ChinhSuaKhoaHoc.jsx'
 
+import ScrollToTop from './components/ui/location/ScrollToTop.jsx'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path='/' element={<App />}></Route>
         <Route path='/trangchu' element={<TrangChu />}></Route>
         <Route path='/khoahoc' element={<TrangChu_DSKhoaHoc />}></Route>
-        <Route path='/khoahoc/:id' element={<Chitietkhoahoc />}></Route>
+        <Route path='/khoahoc/:id' element={<ChiTietKhoaHoc />}></Route>
         <Route path='/dangnhap' element={<DangNhap />}></Route>
 
-        <Route path='/thongtinthanhtoan' element={<Thanh_toan />}></Route>
-        <Route path='/thongtinthanhtoan/thanhtoanthanhcong' element={<Thanh_toan2 />}></Route>
+        <Route path='/thongtinthanhtoan' element={<ThanhToan />}></Route>
+        <Route path='/thongtinthanhtoan/thanhtoanthanhcong' element={<ThanhToan2 />}></Route>
 
         <Route path='/dashboard' element={<Dashboard />}></Route>
 

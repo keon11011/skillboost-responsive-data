@@ -14,15 +14,15 @@ import UserGroup from '../components/icons/User/UsersGroup.jsx'
 import CalendarCheck from '../components/icons/Calendar/CalendarCheck.jsx'
 import CalendarClose from '../components/icons/Calendar/CalendarClose.jsx'
 import Clock from '../components/icons/Calendar/Clock.jsx'
-import TextInput from '../components/ui/placeholder/TextInput'
-import TextArea from '../components/ui/placeholder/TextArea'
-import DropDown from '../components/ui/placeholder/DropDown'
-import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker'
+import TextInput from '../components/ui/placeholder/TextInput.jsx'
+import TextArea from '../components/ui/placeholder/TextArea.jsx'
+import DropDown from '../components/ui/placeholder/DropDown.jsx'
+import CustomDatePicker from '../components/ui/placeholder/CustomDatePicker.jsx'
 import Button from '../components/ui/button/Button.jsx'
-import InformSuccess from '../components/ui/inform/InformSuccess'
-import InformFailure from '../components/ui/inform/InformFailure'
+import InformSuccess from '../components/ui/inform/InformSuccess.jsx'
+import InformFailure from '../components/ui/inform/InformFailure.jsx'
 
-const Chitietkhoahoc = () => {
+const ChiTietKhoaHoc = () => {
 
     const [showCourseSelector, setShowCourseSelector] = useState(false);
 
@@ -167,11 +167,9 @@ const Chitietkhoahoc = () => {
             <div name="Header">
                 <Header />
             </div>
-            <div className='px-40 pb-16'>
-
-                <div className='flex flex-row pt-[64px]'>
-
-                    <div className='pr-[64px] '>
+            <div className='px-40 pb-16 max-sm:px-4 max-sm:pt-0'>
+                <div className='flex flex-row pt-[64px] max-sm:flex-col'>
+                    <div className='pr-[64px] max-sm:p-4 max-sm:pt-0 '>
                         <img
                             src={`http://localhost:80/SkillBoost-API/images/${thongTinKhoaHocs.HinhMinhHoa}`}
                             alt=""
@@ -179,11 +177,11 @@ const Chitietkhoahoc = () => {
                             height={300}
                         />
                     </div>
-                    <div className='space-y-[16px]'>
-                        <div className='display-small text-text-primary '>
+                    <div className='space-y-[16px] max-sm:px-4'>
+                        <div className='display-small text-text-primary max-sm:text-xl '>
                             {thongTinKhoaHocs.TenKhoaHoc}
                         </div>
-                        <div className='title-large text-text-primary space-y-[24px]'>
+                        <div className='title-large text-text-primary space-y-[24px] max-sm:text-base max-sm:font-semibold'>
                             Chuẩn bị sẵn sàng để thành công và tìm hiểu các khái niệm phân tích kinh doanh chính để phát triển mạnh trong sự nghiệp Chuyên viên phân tích kinh doanh của bạn!
                         </div>
                         <div className='title-medium'>
@@ -204,11 +202,11 @@ const Chitietkhoahoc = () => {
 
                 </div>
 
-                <div className='flex flex-row pt-16 gap-[24px]'>
+                <div className='flex flex-row pt-16 gap-[24px]  max-sm:flex-col'>
 
-                    <div className='flex flex-col gap-[24px] w-2/3'>
+                    <div className='flex flex-col gap-[24px] w-3/4 max-sm:w-full'>
                         <div className=' bg-white p-[36px] rounded-lg shadow-md  flex flex-col gap-6	'>
-                            <div className='headline-small'>
+                            <div className='headline-small '>
                                 Mô tả khóa học
                             </div>
                             <div className='body-large'>
@@ -219,7 +217,7 @@ const Chitietkhoahoc = () => {
                             <div className='headline-small'>
                                 Bình luận
                             </div>
-                            <div className='body-large flex flex-row gap-[24px]'>
+                            <div className='body-large flex flex-row gap-[24px] max-sm:flex-col'>
                                 <FeedbackCard
                                     cusname={"Nguyễn Văn An"}
                                     starrate={"5"}
@@ -235,8 +233,8 @@ const Chitietkhoahoc = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col gap-[24px] '>
-                    <div className='w-[418px] max-sm:w-auto h-auto relative bg-background-primary rounded-lg p-6'>
+                    <div className='flex flex-col gap-[24px] w-1/4 max-sm:w-full '>
+                    <div className='bg-white p-[24px] rounded-lg shadow-md  flex flex-col '>
                             <div className='headline-small text-brand-default'>
                             {formatAmountToVND(thongTinKhoaHocs.GiaTien)}
                             </div>
@@ -387,4 +385,5 @@ const Chitietkhoahoc = () => {
     )
 }
 
-export default Chitietkhoahoc
+export default ChiTietKhoaHoc
+

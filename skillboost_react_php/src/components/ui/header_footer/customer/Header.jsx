@@ -27,7 +27,7 @@ const Header = () => {
             )}
           </button><div>
             {isOpen && (
-              <nav className="absolute top-8 right-[-12px] mt-2 p-5 max-sm:flex-col max-sm:gap-10 z-10 duration-150 rounded-lg h-[300px] w-[350px] justify-between bg-white">
+              <nav className="absolute top-8 right-[-12px] mt-2 p-5 max-sm:flex-col max-sm:gap-10 z-10 duration-150 rounded-lg h-[200px] w-[350px] justify-between bg-white">
                 <div className=" pl-[110px] flex flex-col gap-5">
                   <ul className='py-2 px-2 pt-10'>
                     <li>
@@ -39,11 +39,7 @@ const Header = () => {
                       <Link to="/khoahoc" className="hover:text-brand-default font-bold">Khóa học</Link>
                     </li>
                   </ul>
-                  <ul className=' py-2 px-2 '>
-                    <li>
-                      <Link to="/dangnhap" className="hover:text-brand-default font-bold">Đăng nhập</Link>
-                    </li>
-                  </ul>
+
                 </div>
 
               </nav>
@@ -61,11 +57,6 @@ const Header = () => {
             <ul className=' py-2 px-2 '>
               <li>
                 <Link to="/khoahoc" className="hover:text-brand-default font-bold">Khóa học</Link>
-              </li>
-            </ul>
-            <ul className=' py-2 px-2 '>
-              <li>
-                <Link to="/dangnhap" className="hover:text-brand-default font-bold"><ButtonFloat>Đăng nhập</ButtonFloat></Link>
               </li>
             </ul>
           </nav>

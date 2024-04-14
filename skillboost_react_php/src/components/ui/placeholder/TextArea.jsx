@@ -14,8 +14,8 @@ const TextAreaWrapper = styled.div`
   flex: 1;
   position: relative;
   width: 100%; /* Set width to 100% */
-  max-width: 100%; /* Ensure it doesn't exceed the screen width */
-  min-width: 350px;
+  max-width: 100%;
+  min-width: 240px;
   border-radius: 0.5rem;
   background-color: #FAFAFA;
   min-height: 100px;

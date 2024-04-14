@@ -68,25 +68,25 @@ const DSKhoaHoc = () => {
   return (
     <main id = "DSKhoaHoc">
     <div className='bg-background-secondary relative grid grid-cols-7'>
-      <div id='Sidebar' className='col-span-1'>
+      <div id='Sidebar'>
         <SidebarQL/>
       </div>
         
-      <div id="ContentContainer" className='-full p-6 col-span-6 max-sm:col-span-7 bg-background-secondary px-16 max-sm:px-3 py-8 max-sm:h-screen space-y-6' >
-        <div id="Header" className='max-sm:pl-24'>
+      <div id="ContentContainer" className='w-full p-6 col-span-6 max-sm:col-span-7 bg-background-secondary px-16 max-sm:px-3 py-8 max-sm:h-screen space-y-6' >
+        <div id="Header" className='max-sm:pl-12'>
           <HeaderAdmin>Khóa học</HeaderAdmin>
         </div>
           
-        <div id="CourseList" className='w-full h-auto relative rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] flex-col items-start justify-bsetween p-6'>
+        <div id="CourseList" className='w-full h-auto relative rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] flex-col items-start justify-between p-6'>
           <div className='flex justify-between pb-9 max-sm:pb-4'>
             {/* Các nút chức năng để xem khóa học */}
             <div className="relative flex items-center title-large mr-6">Danh sách khóa học</div>
             <div className="max-sm:hidden">{showSearchBar && <SearchBar previewText='Tìm kiếm khóa học'/>}</div>
 
-            <div className='gap-4 cursor-pointer block'>
-              <Link to='/khoahocAdmin/taokhoahoc'>
+            <div className='gap-4 cursor-pointer block max-sm:overflow-x-auto max-sm:w-24'>
+              {/* <Link to='/khoahocAdmin/taokhoahoc'>
               <ActionIcon icon={<AddPlus width="1.5rem" height="1.5rem"/>}/>
-              </Link>
+              </Link> */}
 
               <ActionIcon icon={<SearchMagnifyingGlass width="1.5rem" height="1.5rem"/>} onClick={handleSearchIconClick}/>
               <ActionIcon icon={<Filter width="1.5rem" height="1.5rem"/>} onClick={handleCourseListFilterClick}/>

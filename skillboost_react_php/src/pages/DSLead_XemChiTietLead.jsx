@@ -171,27 +171,27 @@ const DSLead_XemChiTietLead = () => {
       <div id='Sidebar' className='sticky top-0 h-screen max-sm:relative'>
         <SidebarQL/>
       </div>
-      <div id='ContentContainer' className='w-full h-full px-[64px] py-[32px] space-y-[24px]'>
+      <div id='ContentContainer' className='w-full h-full sm:px-[64px] max-sm:px-[30px] py-[32px] space-y-[24px]'>
         <div id='Header'>
           <HeaderAdmin progressBar={<Nhantuvan />}>{inputs.HoTenLead}</HeaderAdmin>
         </div>
-        <div id="LeadInfoNavigation" className="flex space-x-[24px]">
+        <div id="LeadInfoNavigation" className="flex sm:space-x-[24px] max-sm:flex-col max-sm:space-y-[24px]">
           <div className="grow">
             <LeadInfoTab/>
           </div>
           {trangthaiLead(inputs.TrangThaiLead)}
         </div>
         <div id='ContentInside' className="w-full h-full rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border gap-[1rem] space-y-[24px]">
-          <div id='Header' className='flex justify-between items-center'>
+          <div id='Header' className='flex max-sm:flex-col sm:justify-between sm:items-center'>
             <div className='flex space-x-[16px] items-center'>
               <div className='cursor-pointer block'>
                 <Link to="/lead/thongtin">
                   <ActionIcon size='Medium' icon={<ChevronLeft width="1.5rem" height="1.5rem" />} />
                 </Link>
               </div>
-              <div className='text-text-primary title-large'>Thông tin Lead</div>
+              <div className='text-text-primary sm:title-large max-sm:title-medium'>Thông tin Lead</div>
             </div>
-            <div className="flex space-x-[12px]">
+            <div className="flex max-sm:pt-3 space-x-[12px] max-sm:justify-end">
               <div className='cursor-pointer block'>
                 <Link to={`/lead/thongtin/chinhsuachitietlead/${inputs.MaLead}`}>
                   <ActionPersonDetail variant="Edit" />
@@ -204,7 +204,7 @@ const DSLead_XemChiTietLead = () => {
 
           <div id='Content' className='flex flex-col space-y-[24px] w-full h-full'>
             <div id='TextInputs' className='space-y-[24px]'>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <TextInput variant='ReadOnly' title='Lead ID' showRedAsterisk value={inputs.MaLead} type="text" />
                 <TextInput variant='ReadOnly' title='Họ tên' showRedAsterisk value={inputs.HoTenLead} type="text" />
                 <DropDown
@@ -215,7 +215,7 @@ const DSLead_XemChiTietLead = () => {
                 >
                 </DropDown>
               </div>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <CustomDatePicker
                   variant='ReadOnly'
                   title='Ngày sinh'
@@ -238,7 +238,7 @@ const DSLead_XemChiTietLead = () => {
                   type="text"
                 />
               </div>
-              <div className='flex space-x-[24px]'>
+              <div className='flex max-sm:flex-col sm:space-x-[24px] max-sm:space-y-[24px]'>
                 <DropDown
                   variant='ReadOnly'
                   title="Nghề nghiệp"

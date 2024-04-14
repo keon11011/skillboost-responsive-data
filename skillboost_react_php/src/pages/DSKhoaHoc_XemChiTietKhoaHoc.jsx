@@ -68,7 +68,7 @@ const DSKhoaHoc_XemChiTietKhoaHoc = () => {
     </div>
         
     <div id='ContentContainer' className='col-span-6 max-sm:col-span-7 bg-background-secondary px-16 max-sm:px-4 py-8 space-y-6'>
-      <div id='Header' className='max-sm:pl-20'>
+      <div id='Header' className='max-sm:pl-12'>
         <HeaderAdmin>Khóa học</HeaderAdmin>
       </div>
 
