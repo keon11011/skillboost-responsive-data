@@ -58,7 +58,7 @@ const TrangChu_DSKhoaHoc = () => {
                     <ul key={key}>
                         <li>
                             <Link to={`/khoahoc/${khoahoc.MaKhoaHoc}`}>
-                                <CourseCard coursepic={khoahoc.HinhMinhHoc} coursename ={khoahoc.TenKhoaHoc} teachername={khoahoc.GiangVien} starrate={khoahoc.DanhGiaKhoaHoc} price={formatAmountToVND(khoahoc.GiaTien)}/>
+                                <CourseCard coursepic={`http://localhost:80/SkillBoost-API/images/${khoahoc.HinhMinhHoa}`} coursename ={khoahoc.TenKhoaHoc} teachername={khoahoc.GiangVien} starrate={khoahoc.DanhGiaKhoaHoc} price={formatAmountToVND(khoahoc.GiaTien)}/>
                             </Link>
                         </li>
                     </ul>

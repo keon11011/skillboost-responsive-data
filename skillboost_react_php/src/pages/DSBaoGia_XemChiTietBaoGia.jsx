@@ -17,12 +17,15 @@ import InformSuccess from '../components/ui/inform/InformSuccess'
 import InformFailure from '../components/ui/inform/InformFailure'
 
 import ChevronLeft from '../components/icons/Arrow/ChevronLeft';
+import AddPlus from '../components/icons/Edit/AddPlus'
 import CloseMd from '../components/icons/Menu/CloseMd'
 
 
 const DSBaoGia_XemChiTietBaoGia = () => {
 
+
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
 
   const handleDelete = () => {
     // Show delete confirmation pop-up
@@ -73,14 +76,15 @@ const DSBaoGia_XemChiTietBaoGia = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFailure, setshowFailure] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleOnClickEmailSend = (event) => {
     event.preventDefault();
 
     axios.patch('http://localhost:80/SkillBoost-API/api/BaoGia/sent_mail.php', {'MaBaoGia':thongTinBaoGias.MaBaoGia})
     .then(function(response) {
-      console.log(response)
 
-      console.log(response.data);
+      console.log('Patch gửi email',response.data);
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
@@ -172,7 +176,7 @@ const DSBaoGia_XemChiTietBaoGia = () => {
                       <td colspan="2" className="px-[16px] py-[24px] label-medium text-text-primary">
                         Tổng tiền:
                       </td>
-                      <td className="px-[16px] py-[24px] label-medium text-brand-default">4.000.000đ</td>
+                      <td className="px-[16px] py-[24px] label-medium text-brand-default">{thongTinBaoGias.TongTien}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -191,74 +195,6 @@ const DSBaoGia_XemChiTietBaoGia = () => {
             </div>
           </div>
         </div>
-        {showPromotionInputs ? (
-              <>
-                <div className='title-medium text-text-primary'>Khuyến mãi</div>
-                <div className='flex overflow-x-auto w-full space-x-[16px] '>
-                  <TextInput 
-                    title="Số khóa học mua chung" 
-                    previewText="Nhập số khóa học" 
-                    value={selectedCoursesLength} 
-                    type="text"
-                  />
-                  {/* <DropDown
-                    title="Đối tượng ưu tiên"
-                    previewText="Chọn đối tượng ưu tiên"
-                    options={["Học sinh - Sinh Viên", "Giảng viên đại học", "Không có"]}
-                    selectedOption={selectedDoiTuongUuTien}
-                    setSelectedOption={setSelectedDoiTuongUuTien}
-                  /> */}
-                  <TextInput 
-                    title="Đối tượng ưu tiên" 
-                    previewText="Chọn đối tượng ưu tiên" 
-                    value={lead.TenNgheNghiep} 
-                    type="text"
-                  />
-                  {/* <DropDown
-                    title="Dịp đặc biệt"
-                    previewText="Chọn dịp đặc biệt"
-                    options={["Ngày lễ", "Không có"]}
-                    selectedOption={selectedDipDacBiet}
-                    setSelectedOption={setSelectedDipDacBiet}
-                  /> */}
-                  <TextInput 
-                    title="Dịp đặc biệt" 
-                    previewText="Chọn dịp đặc biệt" 
-                    value={specialOccasion} 
-                    type="text"
-                  />
-                </div>
-                <div className='flex w-1/3 pr-[16px]'>
-                  {qdggThoa ? (
-                      // Render DropDown if qdggThoa is true
-                      <DropDown
-                          id="PhanTramGiamGia"
-                          title="Phần trăm giảm giá (%)"
-                          previewText="Chọn Phần trăm giảm giá (%)"
-                          options={discountArray.map(i => ({
-                            value: i, 
-                            label:i
-                        }))}
-                          onHandleChange={handlePhanTramGiamGiaChange}
-                      />
-                  ) : (
-                      <TextInput
-                          title="Phần trăm giảm giá (%)"
-                          previewText="Nhập phần trăm giảm giá"
-                          value="Không tìm thấy mã giảm giá phù hợp!"
-                      />
-                  )}
-                </div>
-                <div className='flex'>
-                  <Button variant='Neutral' size='Medium' onClick={handleAddPromotionClick}>Ẩn khuyến mãi</Button>
-                </div>
-              </>
-            ) : (
-              <div className='space-y-[16px]'>
-                <div className='title-medium text-text-primary'>Khuyến mãi</div>
-                <Button variant='Neutral' size='Medium' leftIcon={<AddPlus width="1.25rem" height="1.25rem" strokeWidth={1.5} />} onClick={handleAddPromotionClick}>Thêm khuyến mãi</Button>
-              </div> 
-            )}
           {showDeleteConfirmation && (
             <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-white bg-opacity-50">
               <div className="relative flex flex-col space-y-[24px] bg-white rounded-lg shadow-lg p-8">

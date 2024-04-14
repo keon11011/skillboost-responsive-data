@@ -105,7 +105,7 @@ const DSKhoaHoc_XemChiTietKhoaHoc = () => {
           <div>
             <img
               className="w-[424px] max-sm:w-auto h-auto rounded-lg object-cover object-center relative flex"
-              src={ITBA_course}
+              src={`http://localhost:80/SkillBoost-API/images/${thongTinKhoaHocs.HinhMinhHoa}`}
               alt="course image"
             />
           </div>

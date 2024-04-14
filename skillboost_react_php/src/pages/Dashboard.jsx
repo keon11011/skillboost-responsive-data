@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import axios from "axios"
+import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'
+
 import SidebarQL from "../components/ui/sidebar/SidebarQL";
 import HeaderAdmin from "../components/ui/header_footer/admin/headerad/HeaderAdmin";
 import DashboardOverviewCardUp from "../components/ui/card/DashboardOverviewCardUp";
@@ -11,6 +14,20 @@ import ColumnChart from "../components/ui/chart/ColumnChart";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [counts, setCounts] = useState([]);
+    useEffect(() => {
+        getCounts();
+    }, []);
+
+    function getCounts() {
+        axios.get('http://localhost:80/SkillBoost-API/api/Dashboard/read_count.php').then(function(response) {
+            console.log('Query đếm số lượng', response.data);
+            setCounts(response.data);
+        });
+    }
+
+
   return (
     <main id="Dashboard" className='relative w-full bg-background-secondary flex'>
       <div id='SidebarQL' className="sticky top-0 z-10 h-screen max-sm:relative ">
@@ -29,22 +46,34 @@ const Dashboard = () => {
           <div className=" flex w-full justify-center items-center rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border">
             <DashboardOverviewCardUp
               namecard={"Số lượng Lead"}
-              percentchange={"3.1%"}
-              total={"9.901"}
+              percentchange={
+                counts.so_luong_lead !== 0
+                  ? `${((counts.so_luong_lead_last_week / counts.so_luong_lead) * 100).toFixed(1)}%`
+                  : "0%"
+              }
+              total={counts.so_luong_lead}
             />
           </div>
           <div className="flex w-full justify-center items-center rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border">
             <DashboardOverviewCardDown
-              namecard={"Số lượng Lead"}
-              percentchange={"3.1%"}
-              total={"9.901"}
+              namecard={"Số lượng khách hàng"}
+              percentchange={
+                counts.so_luong_khach_hang !== 0
+                  ? `${((counts.so_luong_khach_hang_last_week / counts.so_luong_khach_hang) * 100).toFixed(1)}%`
+                  : "0%"
+              }
+              total={counts.so_luong_khach_hang}
             />
           </div>
           <div className="flex w-full justify-center items-center rounded-lg bg-background-primary shadow-[0px_4px_12px_rgba(0,_0,_0,_0.04)] p-[1.5rem] box-border">
             <DashboardOverviewCardNone
-              namecard={"Số lượng Lead"}
-              percentchange={"3.1%"}
-              total={"5.861"}
+              namecard={"Số lượng khóa học bán ra"}
+              percentchange={
+                counts.tong_so_luong_khoa_hoc !== 0
+                  ? `${((counts.so_luong_khoa_hoc_ban_ra / counts.tong_so_luong_khoa_hoc) * 100).toFixed(1)}%`
+                  : "0%"
+              }
+              total={counts.so_luong_khoa_hoc_ban_ra}
             />
           </div>
         </div>

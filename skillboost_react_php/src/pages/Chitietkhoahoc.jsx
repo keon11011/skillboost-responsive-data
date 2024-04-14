@@ -173,7 +173,7 @@ const Chitietkhoahoc = () => {
 
                     <div className='pr-[64px] '>
                         <img
-                            src={BA_course}
+                            src={`http://localhost:80/SkillBoost-API/images/${thongTinKhoaHocs.HinhMinhHoa}`}
                             alt=""
                             width={600}
                             height={300}

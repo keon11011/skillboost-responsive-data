@@ -69,11 +69,11 @@ const LeadInfoTab = () => {
           Báo giá
         </div>
       </TabNavLink>
-      <TabNavLink to={`/lead/dshoatdong/${leadId}`}>
+      {/* <TabNavLink to={`/lead/dshoatdong/${leadId}`}>
         <div>
           Hoạt động
         </div>
-      </TabNavLink>
+      </TabNavLink> */}
     </LeadInfoTabContainer>
   );
 };
